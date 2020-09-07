@@ -1,9 +1,12 @@
 import React from 'react';
+import MainSection from "./MainSection";
+
+
 
 function Home() {
  return (
   <>
-  <h1>HOME</h1>
+  <MainSection/>
   </>
  );
 }
