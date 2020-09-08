@@ -1,5 +1,8 @@
 .btn {
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .btn{
   &-small {
@@ -12,7 +15,7 @@
     font-family: $font-base;
     font-size: 2.6rem;
     font-weight: 300;
-    width: 230px;
+    width: 170px;
     height: 90px;
     border: 1px solid $color-dark;
     text-transform: uppercase;

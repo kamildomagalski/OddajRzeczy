@@ -17,9 +17,11 @@
     align-items: flex-end;
     width: 100%;
     z-index: 2;
+    background-color: rgba(255, 255, 255, 0.5);
+
     @include desktop {
       margin-right: 90px;
-      width: unset;
+      //width: unset;
     }
 
   }
@@ -28,7 +30,7 @@
     display: none;
     margin: 37px 0 17px;
     @include desktop {
-      display: unset;
+      display: flex;
     }
   }
 
@@ -85,6 +87,8 @@
     &__title {
       font-size: 3.0rem;
       margin: 0 0 10px;
+      //background-color: rgba(255, 255, 255, 0.5);
+
     }
 
     &__buttons {
@@ -97,6 +101,7 @@
 
   .menu-icon {
     margin: 30px 30px 0 0;
+    cursor: pointer;
     @include desktop {
       display: none;
     }

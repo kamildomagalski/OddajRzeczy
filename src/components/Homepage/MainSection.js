@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import decoration from '../../assets/Decoration.svg'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {Link} from "react-router-dom";
 
 function MainSection() {
   const [menuClick, setMenuClick] = useState(false)
@@ -12,8 +13,8 @@ function MainSection() {
     <section className={'main'}>
       <header className={'header'}>
         <div className={'logIn'}>
-          <button className={'btn btn-small'}>Zaloguj</button>
-          <button className={'btn btn-small'}>Załóż konto</button>
+          <Link to={'/login'} className={'btn btn-small'}>Zaloguj</Link>
+          <Link to={'/signup'} className={'btn btn-small'}>Załóż konto</Link>
         </div>
         <div className={'menu-icon'} onClick={handleMenuClick}>
           {menuClick
@@ -33,8 +34,8 @@ function MainSection() {
         <h2 className={'content__title'}>Oddaj niechciane rzeczy w zaufane ręce</h2>
         <img className={'decoration'} src={decoration} alt={'decoration'}/>
         <div className={'content__buttons'}>
-          <button className={'btn btn-big'}>Oddaj Rzeczy</button>
-          <button className={'btn btn-big'}>Zorganizuj Zbiórkę</button>
+          <Link to={'/login'} className={'btn btn-big'}>Oddaj Rzeczy</Link>
+          <Link to={'/login'} className={'btn btn-big'}>Zorganizuj Zbiórkę</Link>
         </div>
       </div>
     </section>
