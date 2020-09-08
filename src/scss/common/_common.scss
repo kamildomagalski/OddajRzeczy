@@ -1,24 +1,24 @@
 .btn {
   background-color: white;
 }
-
-.btn-small {
-  font-size: 1.3rem;
-  color: $color-dark;
-  padding: 10px 9px;
-  border: 1px solid $color-yellow;
-}
-
-.btn-big{
-  font-family: $font-base;
-  font-size: 2.6rem;
-  font-weight: 300;
-  width: 230px;
-  height: 90px;
-  border: 1px solid $color-dark;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 0 30px;
+.btn{
+  &-small {
+    font-size: 1.3rem;
+    color: $color-dark;
+    padding: 10px 9px;
+    border: 1px solid $color-yellow;
+  }
+  &-big{
+    font-family: $font-base;
+    font-size: 2.6rem;
+    font-weight: 300;
+    width: 230px;
+    height: 90px;
+    border: 1px solid $color-dark;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0 30px;
+  }
 }
 
 .decoration{

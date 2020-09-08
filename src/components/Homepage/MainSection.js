@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import decoration from '../../assets/Decoration.svg'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 function MainSection() {
+  const [menuClick, setMenuClick] = useState(false)
+  
+  const handleMenuClick = () => setMenuClick(!menuClick);
+  const handleMenuClose= () => setMenuClick(false);
+  
   return (
     <section className={'main'}>
       <header className={'header'}>
@@ -9,12 +15,17 @@ function MainSection() {
           <button className={'btn btn-small'}>Zaloguj</button>
           <button className={'btn btn-small'}>Załóż konto</button>
         </div>
-        <ul className={'menu'}>
-          <li className={'menu__element'}><a className={'menu__link'}>Start</a></li>
-          <li className={'menu__element'}><a className={'menu__link'}>O co chodzi?</a></li>
-          <li className={'menu__element'}><a className={'menu__link'}>O nas</a></li>
-          <li className={'menu__element'}><a className={'menu__link'}>Fundacje i organizacje</a></li>
-          <li className={'menu__element'}><a className={'menu__link'}>Kontakt</a></li>
+        <div className={'menu-icon'} onClick={handleMenuClick}>
+          {menuClick
+            ? <FontAwesomeIcon icon="times" className={'icon'}/>
+            : <FontAwesomeIcon icon="bars" className={'icon'}/>}
+        </div>
+        <ul className={menuClick ? 'menu menu__active' : 'menu'}>
+          <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>Start</a></li>
+          <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>O co chodzi?</a></li>
+          <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>O nas</a></li>
+          <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>Fundacje i organizacje</a></li>
+          <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>Kontakt</a></li>
         </ul>
       </header>
       <div className={'content'}>

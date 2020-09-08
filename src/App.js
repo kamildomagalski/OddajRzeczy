@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import Home from "./components/Homepage/Home";
+import Home from "./components/Homepage";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faTimes, faBars} from "@fortawesome/free-solid-svg-icons";
+
 
 function App() {
   return (
@@ -13,3 +16,5 @@ function App() {
 }
 
 export default App;
+
+library.add(faBars, faTimes)
