@@ -2,7 +2,8 @@ import React from 'react';
 import MainSection from "./MainSection";
 import InfoSection from "./InfoSection";
 import StepsSection from "./StepsSection";
-import About from "./About";
+import AboutSection from "./AboutSection";
+import HelpSection from "./HelpSection";
 
 
 
@@ -12,7 +13,8 @@ function Home() {
   <MainSection/>
   <InfoSection/>
   <StepsSection/>
-  <About/>
+  <AboutSection/>
+  <HelpSection/>
   </>
  );
 }

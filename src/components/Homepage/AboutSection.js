@@ -2,7 +2,7 @@ import React from 'react';
 import decoration from '../../assets/Decoration.svg'
 import signature from '../../assets/Signature.svg'
 import people from '../../assets/People.jpg'
-function About() {
+function AboutSection() {
   
   return (
     <section className={'about'}>
@@ -20,4 +20,4 @@ function About() {
   );
 }
 
-export default About;
+export default AboutSection;

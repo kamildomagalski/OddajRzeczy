@@ -2,8 +2,8 @@
 @import "src/scss/settings/reset";
 @import "src/scss/settings/mixins";
 @import "src/scss/settings/fonts";
-@import "src/scss/settings/base";
 @import "src/scss/settings/colors";
+@import "src/scss/settings/base";
 
 @import "src/scss/common/common";
 
@@ -12,3 +12,4 @@
 @import "Homepage/infoSection";
 @import "Homepage/stepsSection";
 @import "Homepage/aboutSection";
+@import "Homepage/helpSection";
