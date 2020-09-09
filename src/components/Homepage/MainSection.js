@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import decoration from '../../assets/Decoration.svg'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import decoration from '../../assets/Decoration.svg';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Link} from "react-router-dom";
+import {Link as LinkScroll, animateScroll as scroll} from 'react-scroll';
 
 function MainSection() {
   const [menuClick, setMenuClick] = useState(false)
   
   const handleMenuClick = () => setMenuClick(!menuClick);
-  const handleMenuClose= () => setMenuClick(false);
+  const handleMenuClose = () => setMenuClick(false);
   
   return (
     <section className={'main'}>
@@ -23,10 +24,26 @@ function MainSection() {
         </div>
         <ul className={menuClick ? 'menu menu__active' : 'menu'}>
           <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>Start</a></li>
-          <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>O co chodzi?</a></li>
-          <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>O nas</a></li>
-          <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>Fundacje i organizacje</a></li>
-          <li className={'menu__element'}><a className={'menu__link'} onClick={handleMenuClose}>Kontakt</a></li>
+          <li className={'menu__element'}><LinkScroll className={'menu__link'} onClick={handleMenuClose}
+                                                      to={'steps'}
+                                                      spy={true}
+                                                      smooth={true}
+                                                      duration={500}>co chodzi?</LinkScroll></li>
+          <li className={'menu__element'}><LinkScroll className={'menu__link'} onClick={handleMenuClose}
+                                                      to={'about'}
+                                                      spy={true}
+                                                      smooth={true}
+                                                      duration={500}>O nas</LinkScroll></li>
+          <li className={'menu__element'}><LinkScroll className={'menu__link'} onClick={handleMenuClose}
+                                                      to={'help'}
+                                                      spy={true}
+                                                      smooth={true}
+                                                      duration={500}>Fundacje i organizacje</LinkScroll></li>
+          <li className={'menu__element'}><LinkScroll className={'menu__link'} onClick={handleMenuClose}
+                                                      to={'contact'}
+                                                      spy={true}
+                                                      smooth={true}
+                                                      duration={500}>Kontakt</LinkScroll></li>
         </ul>
       </header>
       <div className={'content'}>

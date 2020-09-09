@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 
 function StepsSection() {
   return (
-    <section className={'steps'}>
+    <section className={'steps'} id={'steps'}>
       
       <div className={'steps__header'}>
         <h2 className={'steps__title'}>Wystarczą 4 proste kroki</h2>

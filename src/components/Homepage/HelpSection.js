@@ -27,7 +27,7 @@ function HelpSection() {
   ])
   
   return (
-    <section className={'help'}>
+    <section className={'help'} id={'help'}>
       <div className={'container'}>
         <h2 className={'help__title'}>Komu pomagamy?</h2>
         <img className={'decoration'} src={decoration} alt={'decoration'}/>

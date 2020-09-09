@@ -5,7 +5,7 @@ import people from '../../assets/People.jpg'
 function AboutSection() {
   
   return (
-    <section className={'about'}>
+    <section className={'about'} id={'about'}>
       <div className={'about__info'}>
         <h2 className={'about__title'}>O nas</h2>
         <img className={'decoration'} src={decoration} alt={'decoration'}/>
