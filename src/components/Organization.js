@@ -45,6 +45,9 @@ function Organization({isOrganizationsVisible}) {
   
   const currentOrganizationPosts = organizations.slice(indexOfFirstPost, indexOfLastPost);
   const paginate= (pageNumber)=> setCurrentPage(pageNumber);
+  const numberOfPages=organizations.length/postsPerPage
+
+  
   
   return (
     <div className={isOrganizationsVisible ? 'help__receiver' : 'help__receiver hidden'}>
@@ -64,7 +67,11 @@ function Organization({isOrganizationsVisible}) {
       })
       }
     </ul>
-    <Pagination postPerPage={postsPerPage} totalPosts={organizations.length} paginate={paginate}/>
+    <Pagination postPerPage={postsPerPage}
+                totalPosts={organizations.length}
+                paginate={paginate}
+                currentPage={currentPage}
+                numberOfPages={numberOfPages}/>
   </div>
  );
 }

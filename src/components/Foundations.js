@@ -53,14 +53,16 @@ function Foundations({isFoundationsVisible}) {
 //  Pagination
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  
   const currentFoundationsPosts = foundations.slice(indexOfFirstPost, indexOfLastPost);
+  const numberOfPages=foundations.length/postsPerPage
+
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   
   return (
     <div className={isFoundationsVisible ? 'help__receiver' : 'help__receiver hidden'}>
-      <h3 className={'help__subtitle'}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</h3>
+      <h3 className={'help__subtitle'}>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi
+        współpracujemy. Możesz sprawdzić czym się zajmują, komu pomagają i czego potrzebują.</h3>
       <ul className={'help__list'}>
         {currentFoundationsPosts.map((el, i) => {
           return (
@@ -75,7 +77,11 @@ function Foundations({isFoundationsVisible}) {
         })
         }
       </ul>
-      <Pagination postPerPage={postsPerPage} totalPosts={foundations.length} paginate={paginate}/>
+      <Pagination postPerPage={postsPerPage}
+                   totalPosts={foundations.length}
+                   paginate={paginate}
+                   currentPage={currentPage}
+                  numberOfPages={numberOfPages}/>
     </div>
   );
 }

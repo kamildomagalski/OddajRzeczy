@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import decoration from '../../assets/Decoration.svg'
 import Foundations from "../Foundations";
-import Organization  from "../Organization";
+import Organization from "../Organization";
 import Locals from "../Locals";
+
 function HelpSection() {
   
   
@@ -40,11 +41,21 @@ function HelpSection() {
         <h2 className={'help__title'}>Komu pomagamy?</h2>
         <img className={'decoration'} src={decoration} alt={'decoration'}/>
         <div className={'help__receiversGroups'}>
-          <button className={'btn btn-big btn-receivers'} onClick={handleFoundationVisible}>Fundacjom</button>
-          <button className={'btn btn-big btn-receivers'} onClick={handleOrganizationVisible}>Organizacjom
-            pozarządowym
+          <button className={isFoundationsVisible
+            ? 'btn btn-big btn-receivers active'
+            : 'btn btn-big btn-receivers'} onClick={handleFoundationVisible}>Fundacjom
           </button>
-          <button className={'btn btn-big btn-receivers'} onClick={handleLocalsVisible}>Lokalnym zbiórkom</button>
+          
+          <button className={isOrganizationsVisible
+            ? 'btn btn-big btn-receivers active'
+            : 'btn btn-big btn-receivers'} onClick={handleOrganizationVisible}>Organizacjom pozarządowym
+          </button>
+          
+          <button className={isLocalsVisible
+            ? 'btn btn-big btn-receivers active'
+            : 'btn btn-big btn-receivers'} onClick={handleLocalsVisible}>Lokalnym zbiórkom
+          </button>
+        
         </div>
         
         <Foundations isFoundationsVisible={isFoundationsVisible}/>

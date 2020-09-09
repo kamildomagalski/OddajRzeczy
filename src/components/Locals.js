@@ -29,6 +29,7 @@ function Locals({isLocalsVisible}) {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentLocalsPosts = locals.slice(indexOfFirstPost, indexOfLastPost);
   const paginate= (pageNumber)=> setCurrentPage(pageNumber);
+  const numberOfPages=locals.length/postsPerPage
   
   
   return (
@@ -49,7 +50,11 @@ function Locals({isLocalsVisible}) {
       })
       }
     </ul>
-    <Pagination postPerPage={postsPerPage} totalPosts={locals.length} paginate={paginate}/>
+    <Pagination postPerPage={postsPerPage}
+                totalPosts={locals.length}
+                paginate={paginate}
+                currentPage={currentPage}
+                numberOfPages={numberOfPages}/>
   </div>
  );
 }
