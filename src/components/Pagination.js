@@ -12,7 +12,7 @@ function Pagination({postPerPage, totalPosts, paginate}) {
     <ul className={'pagination__list'}>
       {pageNumbers.map(number => (
         <li key={number} className={'pagination__item'}>
-          <a onClick={() => paginate(number)}  className={'pagination__link'}> {number}</a>
+          <a onClick={() => paginate(number)}   className={'pagination__link'}> {number}</a>
         </li>
       ))}
     </ul>
