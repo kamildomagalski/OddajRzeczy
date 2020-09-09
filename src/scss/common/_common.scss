@@ -1,10 +1,14 @@
-.btn {
+
+.btn{
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.btn{
+  text-decoration: none;
+  &:visited, &:hover, &:active{
+    color: inherit;
+  }
+
   &-small {
     font-size: 1.3rem;
     color: $color-dark;
