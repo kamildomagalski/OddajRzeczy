@@ -1,6 +1,7 @@
 import React from 'react';
 import AppHeader from "./AppHeader";
 import decoration from '../../assets/Decoration.svg'
+import {Link} from "react-router-dom";
 
 function LogIn() {
  return (
@@ -20,7 +21,7 @@ function LogIn() {
        </div>
      </div>
      <div className={'login__buttons'}>
-       <button className={'btn btn-small btn-signUp'}>Załóż konto</button>
+       <Link to={'/signup'} className={'btn btn-small btn-signUp'}>Załóż konto</Link>
        <button className={'btn btn-small btn-logIn'}>Zaloguj się</button>
      </div>
    </div>
