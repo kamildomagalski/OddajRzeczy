@@ -1,89 +1,83 @@
-.login {
-  height: 100vh;
-  width: 100%;
+
+.header {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  width: 100%;
+  z-index: 2;
+
+  @include desktop {
+    margin-right: 90px;
+  }
 
 
-  .header {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    width: 100%;
-    z-index: 2;
-
+  .logIn {
+    display: none;
+    margin: 37px 0 17px;
     @include desktop {
-      margin-right: 90px;
+      display: flex;
+    }
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: -100%;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    //background-color: $color-light;
+    background-color: white;
+    @include desktop {
+      position: static;
+      display: flex;
+      width: unset;
+      flex-direction: row;
+      height: 42px;
+      margin-left: 10px;
+      background-color: transparent;
+      transition: all 0.5s ease;
+
     }
 
-
-    .logIn {
-      display: none;
-      margin: 37px 0 17px;
-      @include desktop {
-        display: flex;
-      }
+    &__active {
+      display: flex;
+      right: 0;
+      transition: all 0.5s ease;
     }
 
-    .menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: -100%;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      //background-color: $color-light;
-      background-color: white;
+    &__element {
+      height: 100%;
+      padding: 9px 20px;
+      color: $color-dark;
+      font-size: 1.8rem;
       @include desktop {
-        position: static;
-        display: flex;
-        width: unset;
-        flex-direction: row;
-        height: 42px;
-        margin-left: 10px;
-        background-color: transparent;
-        transition: all 0.5s ease;
-
-      }
-
-      &__active {
-        display: flex;
-        right: 0;
-        transition: all 0.5s ease;
-      }
-
-      &__element {
         height: 100%;
         padding: 9px 20px;
         color: $color-dark;
         font-size: 1.8rem;
-        @include desktop {
-          height: 100%;
-          padding: 9px 20px;
-          color: $color-dark;
-          font-size: 1.8rem;
-        }
-      }
-
-      &__link {
-        cursor: pointer;
-
       }
     }
-  }
-  .menu-icon {
-    margin: 30px 30px 0 0;
-    cursor: pointer;
-    @include desktop {
-      display: none;
-    }
 
-    .icon {
-      font-size: 3.0rem;
+    &__link {
+      cursor: pointer;
+
     }
   }
 }
+
+.menu-icon {
+  margin: 30px 30px 0 0;
+  cursor: pointer;
+  @include desktop {
+    display: none;
+  }
+
+  .icon {
+    font-size: 3.0rem;
+  }
+}
+
 
