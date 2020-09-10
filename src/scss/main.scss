@@ -1,0 +1,17 @@
+//General
+@import "src/scss/settings/reset";
+@import "src/scss/settings/mixins";
+@import "src/scss/settings/fonts";
+@import "src/scss/settings/colors";
+@import "src/scss/settings/base";
+
+@import "src/scss/common/common";
+
+//Homepage
+@import "Homepage/mainSection";
+@import "Homepage/infoSection";
+@import "Homepage/stepsSection";
+@import "Homepage/aboutSection";
+@import "Homepage/helpSection";
+@import "common/pagination";
+@import "Homepage/contactSection";

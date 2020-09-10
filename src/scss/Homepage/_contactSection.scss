@@ -1,0 +1,148 @@
+.contact {
+  background-image: url("../../assets/Background-Contact-Form.jpg");
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
+  height: 100vh;
+
+
+  .backgroundFilter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: rgba(255, 255, 255, 0.85);
+    height: 100vh;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 60px);
+    //margin: 0 auto;
+    @include desktop {
+      width: 50vw;
+      margin: 0 20px 0;
+
+    }
+  }
+
+  &__title {
+    font-size: 3.5rem;
+    margin: 0 0 20px;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 20px 0 0;
+    width: 100%;
+    max-width: 300px;
+    @include desktop {
+      max-width: 400px;
+
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0 0 30px;
+    @include desktop {
+      flex-direction: row;
+      justify-content: space-between;
+
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+  }
+
+  &__subtitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &__input {
+    font-size: 1.4rem;
+    padding: 5px 0 5px 10px;
+    border: none;
+    border-bottom: 1px solid $color-grey;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-sizing: border-box;
+
+    &::placeholder {
+      font-family: $font-base;
+      font-size: 1.3rem;
+      color: $color-lightgrey;
+    }
+  }
+
+  &__name {
+    @include desktop {
+      margin-right: 5px;
+
+    }
+  }
+
+  &__email {
+
+  }
+
+  &__message {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    min-height: 120px;
+    resize: none;
+    @include desktop {
+      min-height: 90px;
+
+    }
+  }
+
+  .footer {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+
+    &__media {
+      margin-bottom: 10px;
+
+      @include desktop {
+        right: 90px;
+        position: absolute;
+        display: flex;
+        margin-bottom: 0;
+      }
+
+    }
+
+    &__icon {
+      font-size: 20px;
+      margin-left: 15px;
+    }
+  }
+
+  .btn-contact {
+    width: 100px;
+    height: 35px;
+    border: 1px solid $color-grey;
+    margin-top: 20px;
+  }
+}
