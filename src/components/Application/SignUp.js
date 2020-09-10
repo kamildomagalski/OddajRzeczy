@@ -25,8 +25,8 @@ function SignUp() {
          </div>
        </div>
        <div className={'signup__buttons'}>
-         <Link to={'/login'} className={'btn btn-small btn-logIn'}>Zaloguj się</Link>
-         <button className={'btn btn-small btn-signUp'}>Załóż konto</button>
+         <Link to={'/login'} className={'btn btn-small btn-noBorder'}>Zaloguj się</Link>
+         <button className={'btn btn-small btn-border'}>Załóż konto</button>
        </div>
      </div>
    </section>

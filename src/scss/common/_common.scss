@@ -36,11 +36,11 @@
     }
   }
 
-  &-signUp {
+  &-noBorder {
     border: none;
   }
 
-  &-logIn {
+  &-border {
     border: 1px solid $color-dark;
   }
 }

@@ -58,7 +58,11 @@
   &__buttons {
     display: flex;
     justify-content: space-between;
-    width: 350px;
+    width: 272px;
     margin: 10px 0 0;
+    @include tablet{
+      width: 350px;
+
+    }
   }
 }

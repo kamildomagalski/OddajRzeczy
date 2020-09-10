@@ -17,12 +17,12 @@ function LogIn() {
        </div>
        <div className={'login__wrapper'}>
          <p className={'login__subtitle'}>Hasło</p>
-         <input className={'login__input login__password'}/>
+         <input type={'password'} className={'login__input login__password'}/>
        </div>
      </div>
      <div className={'login__buttons'}>
-       <Link to={'/signup'} className={'btn btn-small btn-signUp'}>Załóż konto</Link>
-       <button className={'btn btn-small btn-logIn'}>Zaloguj się</button>
+       <Link to={'/signup'} className={'btn btn-small btn-noBorder'}>Załóż konto</Link>
+       <button className={'btn btn-small btn-border'}>Zaloguj się</button>
      </div>
    </div>
    </section>
