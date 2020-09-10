@@ -2,9 +2,9 @@ import React from 'react';
 import decoration from '../../assets/Decoration.svg'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-function Contact() {
+function ContactSection() {
   return (
-    <section className={'contact'}>
+    <section className={'contact'} id={'contact'}>
       <div className={'backgroundFilter'}>
         <div className={'contact__section'}>
           <h2 className={'contact__title'}>Skontaktuj się z nami</h2>
@@ -44,4 +44,4 @@ function Contact() {
   );
 }
 
-export default Contact;
+export default ContactSection;
