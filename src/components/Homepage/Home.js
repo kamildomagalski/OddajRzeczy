@@ -4,6 +4,7 @@ import InfoSection from "./InfoSection";
 import StepsSection from "./StepsSection";
 import AboutSection from "./AboutSection";
 import HelpSection from "./HelpSection";
+import Contact from "./Contact";
 
 
 
@@ -15,6 +16,7 @@ function Home() {
   <StepsSection/>
   <AboutSection/>
   <HelpSection/>
+  <Contact/>
   </>
  );
 }
