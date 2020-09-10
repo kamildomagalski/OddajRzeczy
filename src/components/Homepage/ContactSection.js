@@ -20,14 +20,16 @@ function ContactSection() {
                 <input className={'contact__input contact__email'} placeholder={'abc@xyz.pl'}/>
               </div>
             </div>
+            
             <div className={'contact__wrapper'}>
               <h3 className={'contact__subtitle'}>Wpisz swoją wiadomosć</h3>
               <textarea className={'contact__input contact__message '}
-                     placeholder={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
-                     'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
-                     'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
-                     'nisi ut aliquip ex ea commodo consequat.'}/>
+                        placeholder={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+                        'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
+                        'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
+                        'nisi ut aliquip ex ea commodo consequat.'}/>
             </div>
+            
             <button className={'btn btn-small btn-contact'}>Wiślij</button>
           </form>
         </div>
