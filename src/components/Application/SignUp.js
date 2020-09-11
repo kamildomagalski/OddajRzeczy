@@ -2,7 +2,6 @@ import React from 'react';
 import AppHeader from "./AppHeader";
 import decoration from "../../assets/Decoration.svg";
 import SignUpForm from "./SignUpForm";
-import {withFirebase} from "../Firebase";
 
 
 function SignUp() {

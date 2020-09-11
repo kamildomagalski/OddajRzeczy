@@ -44,7 +44,7 @@ function SignUpForm({firebase, history}) {
   const isInvalid=
     signUpState.password1 !== signUpState.password2 ||
     signUpState.password1.length < 6 ||
-    signUpState.email === '/\S+@\S+\.\S+/';
+    signUpState.email === '';
   return (
     <>
       <form className={'signup__form'}>
