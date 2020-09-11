@@ -9,6 +9,10 @@ function LogInForm({firebase, history}) {
     password: '',
     error: null
   })
+  const [logInErrors, setLogInErrors] = useState({
+    emailError: '',
+    passError: ''
+  })
   
   const handleChange = (event) => {
     const {name, value} = event.target;
@@ -21,8 +25,12 @@ function LogInForm({firebase, history}) {
   }
   
   const handleSubmit = (event) => {
-    const {email, password} = logInState;
     event.preventDefault();
+    const {email, password} = logInState;
+    
+    if (!validate()) return;
+    clearValidate();
+    
     firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
@@ -42,9 +50,34 @@ function LogInForm({firebase, history}) {
       })
   }
   
-  const isInvalid =
-    logInState.password === '' ||
-    logInState.email === '';
+  
+  function validate() {
+    const re = /\S+@\S+\.\S+/;
+    let isValidate = true;
+    if (re.test(logInState.email) !== true) {
+      setLogInErrors({
+        ...logInErrors,
+        emailError: 'Email nieprawidłowy!'
+      })
+      isValidate = false
+    } else if (logInState.password.length < 6 ||
+      logInErrors.password === ''){
+      setLogInErrors({
+        ...logInErrors,
+        passError: 'Hasło jest za krótkie!'
+      })
+      isValidate = false
+    }
+    
+    return isValidate
+  }
+  function clearValidate() {
+    setLogInErrors({
+      emailError: '',
+      passError: ''
+    })
+  }
+  
   return (
     <>
       <form className={'login__form'} onSubmit={handleSubmit}>
@@ -54,7 +87,8 @@ function LogInForm({firebase, history}) {
                  value={logInState.email}
                  onChange={handleChange}
                  type={'text'}
-                 className={'login__input login__email'}/>
+                 className={logInErrors.emailError ? 'login__input error': 'login__input'}/>
+          <p className={'logError'}>{logInErrors.emailError}</p>
         </div>
         <div className={'login__wrapper'}>
           <p className={'login__subtitle'}>Hasło</p>
@@ -62,12 +96,13 @@ function LogInForm({firebase, history}) {
                  value={logInState.password}
                  onChange={handleChange}
                  type={'password'}
-                 className={'login__input login__password'}/>
+                 className={logInErrors.passError ? 'login__input error': 'login__input'}/>
+          <p className={'logError'}>{logInErrors.passError}</p>
         </div>
         {logInState.error && <p className={'firebaseError'}>{logInState.error.message}</p>}
         <div className={'login__buttons'}>
           <Link to={'/signup'} className={'btn btn-small btn-noBorder'}>Załóż konto</Link>
-          <button type={'submit'} onClick={handleSubmit} disabled={isInvalid}
+          <button type={'submit'} onClick={handleSubmit}
                   className={'btn btn-small btn-border'}>Zaloguj się
           </button>
         </div>
