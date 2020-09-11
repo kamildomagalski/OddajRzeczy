@@ -49,3 +49,24 @@
   width: 150px;
   margin: 10px 20px;
 }
+.logError{
+  position: absolute;
+  bottom: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 1rem;
+  color: red;
+  margin-top: 5px;
+}
+.firebaseError{
+  position: absolute;
+  bottom: 15px;
+  padding: 0;
+  width: 100%;
+  font-size: 1rem;
+  margin-top: 5px ;
+  color: red;
+
+  text-align: center;
+}
+

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Link, withRouter } from "react-router-dom";
-import { withFirebase } from "../Firebase";
+import {Link, withRouter} from "react-router-dom";
+import {withFirebase} from "../Firebase";
 
 
 function SignUpForm({firebase, history}) {
@@ -11,6 +11,10 @@ function SignUpForm({firebase, history}) {
     password2: '',
     error: null
   });
+  const [signUpErrors, setSignUpErrors] = useState({
+    emailError: '',
+    passError: ''
+  })
   
   
   const handleChange = (event) => {
@@ -23,10 +27,12 @@ function SignUpForm({firebase, history}) {
     })
   }
   
-  const handleSubmit = (event) =>{
-    const {email, password1}=signUpState;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const {email, password1} = signUpState;
     
-    event.preventDefault();
+    if (!validate()) return;
+    clearValidate();
     firebase
       .doCreateUserWithEmailAndPassword(email, password1)
       .then(authUser => {
@@ -48,43 +54,78 @@ function SignUpForm({firebase, history}) {
       })
   }
   
-  const isInvalid=
-    signUpState.password1 !== signUpState.password2 ||
-    signUpState.password1.length < 6 ||
-    signUpState.email === '';
+  function validate() {
+    const re = /\S+@\S+\.\S+/;
+    let isValidate = true;
+    if (re.test(signUpState.email) !== true) {
+      setSignUpErrors({
+        ...signUpErrors,
+        emailError: 'Email nieprawidłowy!'
+      })
+      isValidate = false
+    } else if (signUpState.password1.length < 6 ||
+      signUpErrors.password1 === '' ||
+      signUpErrors.password2 === '' ||
+      signUpState.password1 !== signUpState.password2) {
+      setSignUpErrors({
+        ...signUpErrors,
+        passError: 'Hasło za krótkie lub hasła nie pasują do siebie'
+      })
+      isValidate = false
+    }
+    
+    return isValidate
+  }
+  function clearValidate() {
+    setSignUpErrors({
+      emailError: '',
+      passError: ''
+    })
+  }
+  
+  
   return (
     <>
-      <form className={'signup__form'}>
+      <form className={'signup__form'} onSubmit={handleSubmit}>
+        
         <div className={'signup__wrapper'}>
           <p className={'signup__subtitle'}>Email</p>
           <input name={'email'}
                  value={signUpState.email}
                  onChange={handleChange}
                  type={'text'}
-                 className={'signup__input signup__email'}/>
+                 className={signUpErrors.emailError ? 'signup__input error': 'signup__input'}/>
+          <p className={'logError'}>{signUpErrors.emailError}</p>
         </div>
+        
         <div className={'signup__wrapper'}>
           <p className={'signup__subtitle'}>Hasło</p>
           <input name={'password1'}
                  value={signUpState.password1}
                  onChange={handleChange}
                  type={'password'}
-                 className={'login__input signup__password'}/>
+                 className={signUpErrors.passError ? 'signup__input error': 'signup__input'}/>
         </div>
+        
         <div className={'signup__wrapper'}>
           <p className={'signup__subtitle'}>Powtórz hasło</p>
           <input name={'password2'}
                  value={signUpState.password2}
                  onChange={handleChange}
                  type={'password'}
-                 className={'signup__input signup__password'}/>
+                 className={signUpErrors.passError ? 'signup__input error': 'signup__input'}/>
+          <p className={'logError'}>{signUpErrors.passError}</p>
         </div>
-        {signUpState.error && <p>{signUpState.error.message}</p>}
+        
+        {signUpState.error && <p className={'firebaseError'}>{signUpState.error.message}</p>}
+        <div className={'signup__buttons'}>
+          <Link to={'/login'} className={'btn btn-small btn-noBorder'}>Zaloguj się</Link>
+          <button type="submit"
+                  disabled={false}
+                  className={'btn btn-small btn-border'}>Załóż konto
+          </button>
+        </div>
       </form>
-      <div className={'signup__buttons'}>
-        <Link to={'/login'} className={'btn btn-small btn-noBorder'}>Zaloguj się</Link>
-        <button type={'submit'} onClick={handleSubmit} disabled={isInvalid} className={'btn btn-small btn-border'}>Załóż konto</button>
-      </div>
     </>
   );
 }

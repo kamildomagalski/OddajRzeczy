@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { Link, withRouter } from "react-router-dom";
-import { withFirebase } from "../Firebase";
+import React, {useState} from 'react';
+import {Link, withRouter} from "react-router-dom";
+import {withFirebase} from "../Firebase";
 
 
 function LogInForm({firebase, history}) {
-  const [logInState, setLogInState]= useState({
+  const [logInState, setLogInState] = useState({
     email: '',
     password: '',
     error: null
   })
   
-  const handleChange= (event)=> {
-    const {name, value}= event.target;
+  const handleChange = (event) => {
+    const {name, value} = event.target;
     setLogInState(prevState => {
       return {
         ...prevState,
@@ -20,12 +20,12 @@ function LogInForm({firebase, history}) {
     })
   }
   
-  const handleSubmit=(event)=>{
+  const handleSubmit = (event) => {
     const {email, password} = logInState;
     event.preventDefault();
     firebase
       .doSignInWithEmailAndPassword(email, password)
-      .then( () => {
+      .then(() => {
         setLogInState({
           email: '',
           password: '',
@@ -34,43 +34,46 @@ function LogInForm({firebase, history}) {
         history.push('/app');
       })
       .catch(error => {
-       setLogInState({
-         email: '',
-         password: '',
-         error
-       })
+        setLogInState({
+          email: '',
+          password: '',
+          error
+        })
       })
   }
   
-  const isInvalid=
-    logInState.password=== '' ||
+  const isInvalid =
+    logInState.password === '' ||
     logInState.email === '';
- return (
-  <>
-    <form className={'login__form'}>
-      <div className={'login__wrapper'}>
-        <p className={'login__subtitle'}>Email</p>
-        <input name={'email'}
-               value={logInState.email}
-               onChange={handleChange}
-               type={'text'}
-               className={'login__input login__email'}/>
-      </div>
-      <div className={'login__wrapper'}>
-        <p className={'login__subtitle'}>Hasło</p>
-        <input name={'password'}
-               value={logInState.password}
-               onChange={handleChange}
-               type={'password'}
-               className={'login__input login__password'}/>
-      </div>
-      {logInState.error && <p>{logInState.error.message}</p>}
-    </form>
-    <div className={'login__buttons'}>
-      <Link to={'/signup'} className={'btn btn-small btn-noBorder'}>Załóż konto</Link>
-      <button type={'submit'} onClick={handleSubmit} disabled={isInvalid} className={'btn btn-small btn-border'}>Zaloguj się</button>
-    </div>
-  </>
- );
+  return (
+    <>
+      <form className={'login__form'} onSubmit={handleSubmit}>
+        <div className={'login__wrapper'}>
+          <p className={'login__subtitle'}>Email</p>
+          <input name={'email'}
+                 value={logInState.email}
+                 onChange={handleChange}
+                 type={'text'}
+                 className={'login__input login__email'}/>
+        </div>
+        <div className={'login__wrapper'}>
+          <p className={'login__subtitle'}>Hasło</p>
+          <input name={'password'}
+                 value={logInState.password}
+                 onChange={handleChange}
+                 type={'password'}
+                 className={'login__input login__password'}/>
+        </div>
+        {logInState.error && <p className={'firebaseError'}>{logInState.error.message}</p>}
+        <div className={'login__buttons'}>
+          <Link to={'/signup'} className={'btn btn-small btn-noBorder'}>Załóż konto</Link>
+          <button type={'submit'} onClick={handleSubmit} disabled={isInvalid}
+                  className={'btn btn-small btn-border'}>Zaloguj się
+          </button>
+        </div>
+      </form>
+    </>
+  );
 }
+
 export default withRouter(withFirebase(LogInForm));
