@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, withRouter } from "react-router-dom";
+import { withFirebase } from "../Firebase";
 
 
-function SignUpForm({firebase}) {
+function SignUpForm({firebase, history}) {
   
   const [signUpState, setSignUpState] = useState({
     email: '',
@@ -30,6 +31,7 @@ function SignUpForm({firebase}) {
       .doCreateUserWithEmailAndPassword(email, password1)
       .then(authUser => {
         setSignUpState({...signUpState});
+        history.push('/login')
       })
       .catch(error => {
         setSignUpState({
@@ -80,4 +82,4 @@ function SignUpForm({firebase}) {
   );
 }
 
-export default SignUpForm;
+export default withRouter(withFirebase(SignUpForm));
