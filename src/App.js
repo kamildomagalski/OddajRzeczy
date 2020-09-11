@@ -8,6 +8,7 @@ import Home from "./components/Homepage";
 
 import LogIn from "./components/Application/LogIn";
 import SignUp from "./components/Application/SignUp";
+import LogOut from "./components/Application/LogOut";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path={'/'} exact component={Home}/>
         <Route path={'/login'} exact component={LogIn}/>
         <Route path={'/signup'} exact component={SignUp}/>
+        <Route path={'/logout'} exact component={LogOut}/>
       </Switch>
     </Router>
   );
