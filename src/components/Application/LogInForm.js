@@ -11,8 +11,6 @@ function LogInForm({firebase, history}) {
   })
   
   const handleChange= (event)=> {
-    console.log(logInState.password);
-  
     const {name, value}= event.target;
     setLogInState(prevState => {
       return {
@@ -37,7 +35,8 @@ function LogInForm({firebase, history}) {
       })
       .catch(error => {
        setLogInState({
-         ...logInState,
+         email: '',
+         password: '',
          error
        })
       })

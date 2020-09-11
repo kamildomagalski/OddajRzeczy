@@ -30,12 +30,19 @@ function SignUpForm({firebase, history}) {
     firebase
       .doCreateUserWithEmailAndPassword(email, password1)
       .then(authUser => {
-        setSignUpState({...signUpState});
+        setSignUpState({
+          email: '',
+          password1: '',
+          password2: '',
+          error: null
+        });
         history.push('/login')
       })
       .catch(error => {
         setSignUpState({
-          ...signUpState,
+          email: '',
+          password1: '',
+          password2: '',
           error
         });
       })
