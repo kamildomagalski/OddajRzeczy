@@ -1,5 +1,5 @@
 
-.btn{
+.btn {
   font-family: $font-base;
   color: $color-dark;
   background-color: white;
@@ -9,7 +9,7 @@
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.60);
 
-  &:visited, &:hover, &:active{
+  &:visited, &:hover, &:active {
     color: inherit;
   }
 
@@ -19,7 +19,8 @@
     padding: 10px 9px;
     border: 1px solid $color-yellow;
   }
-  &-big{
+
+  &-big {
     font-family: $font-base;
     font-size: 2.6rem;
     font-weight: 300;
@@ -30,13 +31,42 @@
     text-align: center;
     padding: 0 30px;
     margin: 10px 0;
-    @include desktop{
+    @include desktop {
       margin: 0;
     }
   }
+
+  &-noBorder {
+    border: none;
+  }
+
+  &-border {
+    border: 1px solid $color-dark;
+  }
 }
 
-.decoration{
+.decoration {
   width: 150px;
   margin: 10px 20px;
 }
+.logError{
+  position: absolute;
+  bottom: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 1rem;
+  color: red;
+  margin-top: 5px;
+}
+.firebaseError{
+  position: absolute;
+  bottom: 15px;
+  padding: 0;
+  width: 100%;
+  font-size: 1rem;
+  margin-top: 5px ;
+  color: red;
+
+  text-align: center;
+}
+
