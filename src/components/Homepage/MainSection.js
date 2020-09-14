@@ -4,8 +4,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Link} from "react-router-dom";
 import {Link as LinkScroll, animateScroll as scroll} from 'react-scroll';
 import LogOutButton from "../logic_components/LogOutButton";
+import {AuthUserContext} from "../Session";
 
-function MainSection({authUser}) {
+function MainSection() {
   const [menuClick, setMenuClick] = useState(false)
   
   const handleMenuClick = () => setMenuClick(!menuClick);
@@ -31,12 +32,14 @@ function MainSection({authUser}) {
     )
   }
   
-  
   return (
     <section className={'main'}>
       <div className={'backgroundFilter'}>
         <header className={'header'}>
-          {authUser ? <UserLogIn/> : <UserLogOut/>}
+          <AuthUserContext.Consumer>
+            {authUser =>
+              authUser ? <UserLogIn/> : <UserLogOut/>}
+          </AuthUserContext.Consumer>
           <div className={'menu-icon'} onClick={handleMenuClick}>
             {menuClick
               ? <FontAwesomeIcon icon="times" className={'icon'}/>
