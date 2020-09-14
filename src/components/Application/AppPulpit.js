@@ -5,7 +5,8 @@ function AppPulpit() {
  
  return (
   <div>
-  <LogOutButton/>
+  <h1>To jest widok formularza</h1>
+  <LogOutButton className={'btn btn-small'} />
   </div>
  );
 }

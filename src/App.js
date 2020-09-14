@@ -15,7 +15,6 @@ import AppPulpit from "./components/Application/AppPulpit";
 function App() {
   
   return (
-    
       <Router>
         <Switch>
           <Route path={'/'} exact component={Home}/>
@@ -25,7 +24,6 @@ function App() {
           <Route path={'/app'} exact component={AppPulpit}/>
         </Switch>
       </Router>
-
   );
 }
 
