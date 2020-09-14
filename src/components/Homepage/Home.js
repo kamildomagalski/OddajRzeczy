@@ -8,10 +8,10 @@ import ContactSection from "./ContactSection";
 
 
 
-function Home() {
+function Home({authUser}) {
  return (
   <>
-  <MainSection/>
+  <MainSection authUser={authUser}/>
   <InfoSection/>
   <StepsSection/>
   <AboutSection/>

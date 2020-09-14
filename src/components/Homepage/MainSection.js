@@ -3,21 +3,40 @@ import decoration from '../../assets/Decoration.svg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Link} from "react-router-dom";
 import {Link as LinkScroll, animateScroll as scroll} from 'react-scroll';
+import LogOutButton from "../logic_components/LogOutButton";
 
-function MainSection() {
+function MainSection({authUser}) {
   const [menuClick, setMenuClick] = useState(false)
   
   const handleMenuClick = () => setMenuClick(!menuClick);
   const handleMenuClose = () => setMenuClick(false);
   
+  
+  const UserLogIn = () => {
+    
+    return (
+      <div className={'logIn'}>
+        <Link to={'/app'} className={'btn btn-small'}>Oddaj rzeczy</Link>
+        <LogOutButton className={'btn btn-small'}/>
+      </div>
+    )
+  }
+  
+  const UserLogOut = () => {
+    return (
+      <div className={'logIn'}>
+        <Link to={'/login'} className={'btn btn-small'}>Zaloguj</Link>
+        <Link to={'/signup'} className={'btn btn-small'}>Załóż konto</Link>
+      </div>
+    )
+  }
+  
+  
   return (
     <section className={'main'}>
       <div className={'backgroundFilter'}>
         <header className={'header'}>
-          <div className={'logIn'}>
-            <Link to={'/login'} className={'btn btn-small'}>Zaloguj</Link>
-            <Link to={'/signup'} className={'btn btn-small'}>Załóż konto</Link>
-          </div>
+          {authUser ? <UserLogIn/> : <UserLogOut/>}
           <div className={'menu-icon'} onClick={handleMenuClick}>
             {menuClick
               ? <FontAwesomeIcon icon="times" className={'icon'}/>
