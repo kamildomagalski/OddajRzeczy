@@ -1,5 +1,6 @@
 import React from 'react';
 import LogOutButton from "../logic_components/LogOutButton";
+import { withAuthorization } from '../Session'
 
 function AppPulpit() {
  
@@ -10,4 +11,7 @@ function AppPulpit() {
   </div>
  );
 }
-export default AppPulpit;
+
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition) (AppPulpit);
