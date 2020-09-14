@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {Link, withRouter} from "react-router-dom";
-import {withFirebase} from "../Firebase";
+import React, { useState } from 'react';
+import { Link, withRouter } from "react-router-dom";
+import { withFirebase } from "../Firebase";
 
 
-function SignUpForm({firebase, history}) {
+function SignUpForm({ firebase, history }) {
   
   const [signUpState, setSignUpState] = useState({
     email: '',
@@ -35,6 +35,14 @@ function SignUpForm({firebase, history}) {
     clearValidate();
     firebase
       .doCreateUserWithEmailAndPassword(email, password1)
+      .then(authUser => {
+        //create a user in Firebase realtime database
+        return firebase
+          .user(authUser.user.uid)
+          .set({
+            email: email
+          })
+      })
       .then(authUser => {
         setSignUpState({
           email: '',
