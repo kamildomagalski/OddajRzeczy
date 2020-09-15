@@ -19,23 +19,24 @@ function MainSection({firebase}) {
   const handleMenuClose = () => setMenuClick(false);
   
   const userId = firebase.auth.currentUser?.uid
-
-  
-  if (userId){
-    console.log('ok');
-    
-  }
   const rootRef = firebase.db.ref('users/' + userId);
-
+  console.log(userId);
   
   useEffect(() => {
     rootRef.child('email').once('value', snap => {
       setUserEmail(snap.val())
     })
-    // setLoaded(true)
+    setLoaded(true)
   }, [userId])
   
- 
+  const UserLoggedOut = () => {
+    return (
+      <div className={'logIn'}>
+        <Link to={'/login'} className={'btn btn-small'}>Zaloguj</Link>
+        <Link to={'/signup'} className={'btn btn-small'}>Załóż konto</Link>
+      </div>
+    )
+  }
   
   
   
@@ -47,7 +48,7 @@ function MainSection({firebase}) {
     <section className={'main'}>
       <div className={'backgroundFilter'}>
         <header className={'header'}>
-          <LogButtons userEmail={userEmail}/>
+          <LogButtons userEmail={userEmail} isLoaded={isLoaded} userId={userId}/>
           <div className={'menu-icon'} onClick={handleMenuClick}>
             {menuClick
               ? <FontAwesomeIcon icon="times" className={'icon'}/>
