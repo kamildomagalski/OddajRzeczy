@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {AuthUserContext} from "../Session";
 import {withFirebase} from "../Firebase";
 import {Link} from "react-router-dom";
 import {Link as LinkScroll, animateScroll as scroll} from 'react-scroll';
 
 import decoration from '../../assets/Decoration.svg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import LogOutButton from "../logic_components/LogOutButton";
 import LogButtons from "../logic_components/LogButtons";
-
 
 function MainSection({firebase}) {
   const [menuClick, setMenuClick] = useState(false)
@@ -20,28 +17,20 @@ function MainSection({firebase}) {
   
   const userId = firebase.auth.currentUser?.uid
   const rootRef = firebase.db.ref('users/' + userId);
-  console.log(userId);
   
   useEffect(() => {
-    rootRef.child('email').once('value', snap => {
+    rootRef.child('email').on('value', snap => {
       setUserEmail(snap.val())
+      setLoaded(true)
     })
-    setLoaded(true)
   }, [userId])
-  
-  
-  
-  
-  
-  
-  
   
   return (
   
     <section className={'main'}>
       <div className={'backgroundFilter'}>
         <header className={'header'}>
-          <LogButtons userEmail={userEmail} isLoaded={isLoaded} userId={userId}/>
+          <LogButtons userEmail={userEmail} isLoaded={isLoaded}/>
           <div className={'menu-icon'} onClick={handleMenuClick}>
             {menuClick
               ? <FontAwesomeIcon icon="times" className={'icon'}/>

@@ -4,17 +4,7 @@ import {Link} from "react-router-dom";
 import LogOutButton from "./LogOutButton";
 import ContentLoader from "react-content-loader";
 
-function LogButtons({userEmail, isLoaded, userId}) {
-  
-  const [isLoaderVisible, setLoaderVisible]= useState(true)
-  
- useEffect(()=>{
-   if(userEmail === null){
-     setLoaderVisible(false)
-   }
- },[userEmail])
-  console.log(isLoaderVisible);
-  console.log(userEmail, 'buttons');
+function LogButtons({userEmail, isLoaded}) {
   
   const UserLoggedIn = ({userEmail}) => {
     return (
@@ -34,7 +24,7 @@ function LogButtons({userEmail, isLoaded, userId}) {
     )
   }
   
-  if (!userEmail && isLoaderVisible) {
+  if (!isLoaded) {
     return (
       <div className={'main__loading'}>
         <ContentLoader speed={1} >
