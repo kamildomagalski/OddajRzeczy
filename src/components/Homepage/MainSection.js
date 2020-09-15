@@ -29,14 +29,7 @@ function MainSection({firebase}) {
     setLoaded(true)
   }, [userId])
   
-  const UserLoggedOut = () => {
-    return (
-      <div className={'logIn'}>
-        <Link to={'/login'} className={'btn btn-small'}>Zaloguj</Link>
-        <Link to={'/signup'} className={'btn btn-small'}>Załóż konto</Link>
-      </div>
-    )
-  }
+  
   
   
   

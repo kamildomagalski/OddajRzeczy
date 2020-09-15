@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AuthUserContext} from "../Session";
 import {Link} from "react-router-dom";
 import LogOutButton from "./LogOutButton";
@@ -6,6 +6,15 @@ import ContentLoader from "react-content-loader";
 
 function LogButtons({userEmail, isLoaded, userId}) {
   
+  const [isLoaderVisible, setLoaderVisible]= useState(true)
+  
+ useEffect(()=>{
+   if(userEmail === null){
+     setLoaderVisible(false)
+   }
+ },[userEmail])
+  console.log(isLoaderVisible);
+  console.log(userEmail, 'buttons');
   
   const UserLoggedIn = ({userEmail}) => {
     return (
@@ -16,10 +25,16 @@ function LogButtons({userEmail, isLoaded, userId}) {
       </div>
     )
   }
+  const UserLoggedOut = () => {
+    return (
+      <div className={'logIn'}>
+        <Link to={'/login'} className={'btn btn-small'}>Zaloguj</Link>
+        <Link to={'/signup'} className={'btn btn-small'}>Załóż konto</Link>
+      </div>
+    )
+  }
   
-  
-  
-  if (!userEmail) {
+  if (!userEmail && isLoaderVisible) {
     return (
       <div className={'main__loading'}>
         <ContentLoader speed={1} >
@@ -31,7 +46,7 @@ function LogButtons({userEmail, isLoaded, userId}) {
   return (
     <AuthUserContext.Consumer>
       {authUser =>
-        authUser ? <UserLoggedIn userEmail={userEmail} /> : null}
+        authUser ? <UserLoggedIn userEmail={userEmail} /> : <UserLoggedOut/>}
     </AuthUserContext.Consumer>
   );
 }
