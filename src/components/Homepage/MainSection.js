@@ -1,45 +1,53 @@
-import React, {useState} from 'react';
-import decoration from '../../assets/Decoration.svg';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import React, {useEffect, useState} from 'react';
+import {AuthUserContext} from "../Session";
+import {withFirebase} from "../Firebase";
 import {Link} from "react-router-dom";
 import {Link as LinkScroll, animateScroll as scroll} from 'react-scroll';
-import LogOutButton from "../logic_components/LogOutButton";
-import {AuthUserContext} from "../Session";
 
-function MainSection() {
+import decoration from '../../assets/Decoration.svg';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import LogOutButton from "../logic_components/LogOutButton";
+import LogButtons from "../logic_components/LogButtons";
+
+
+function MainSection({firebase}) {
   const [menuClick, setMenuClick] = useState(false)
+  const [userEmail, setUserEmail] = useState(null)
+  const [isLoaded, setLoaded] = useState(false)
   
   const handleMenuClick = () => setMenuClick(!menuClick);
   const handleMenuClose = () => setMenuClick(false);
   
+  const userId = firebase.auth.currentUser?.uid
+
   
-  const UserLogIn = () => {
+  if (userId){
+    console.log('ok');
     
-    return (
-      <div className={'logIn'}>
-        <Link to={'/app'} className={'btn btn-small'}>Oddaj rzeczy</Link>
-        <LogOutButton className={'btn btn-small'}/>
-      </div>
-    )
   }
+  const rootRef = firebase.db.ref('users/' + userId);
+
   
-  const UserLogOut = () => {
-    return (
-      <div className={'logIn'}>
-        <Link to={'/login'} className={'btn btn-small'}>Zaloguj</Link>
-        <Link to={'/signup'} className={'btn btn-small'}>Załóż konto</Link>
-      </div>
-    )
-  }
+  useEffect(() => {
+    rootRef.child('email').once('value', snap => {
+      setUserEmail(snap.val())
+    })
+    // setLoaded(true)
+  }, [userId])
+  
+ 
+  
+  
+  
+  
+  
   
   return (
+  
     <section className={'main'}>
       <div className={'backgroundFilter'}>
         <header className={'header'}>
-          <AuthUserContext.Consumer>
-            {authUser =>
-              authUser ? <UserLogIn/> : <UserLogOut/>}
-          </AuthUserContext.Consumer>
+          <LogButtons userEmail={userEmail}/>
           <div className={'menu-icon'} onClick={handleMenuClick}>
             {menuClick
               ? <FontAwesomeIcon icon="times" className={'icon'}/>
@@ -83,4 +91,4 @@ function MainSection() {
   );
 }
 
-export default MainSection;
+export default withFirebase(MainSection);
