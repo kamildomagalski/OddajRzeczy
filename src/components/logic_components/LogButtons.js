@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {AuthUserContext} from "../Session";
 import {Link} from "react-router-dom";
 import LogOutButton from "./LogOutButton";
