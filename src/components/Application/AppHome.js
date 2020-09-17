@@ -1,7 +1,8 @@
 import React from 'react'
 import AppMain from "./AppMain";
-import AppForm from "./GiveAwayForm/AppForm";
+import AppForm from "./AppForm";
 import {withAuthorization} from "../Session";
+import ContactSection from "../Homepage/ContactSection";
 
 
 function AppHome() {
@@ -9,6 +10,7 @@ function AppHome() {
   <>
    <AppMain/>
    <AppForm/>
+   <ContactSection/>
   </>
  );
 }
