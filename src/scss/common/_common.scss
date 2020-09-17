@@ -79,3 +79,17 @@
   margin-top: 5px;
 }
 
+.backgroundFilter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.60);
+  height: 100vh;
+  width: 100%;
+  @include desktop {
+    align-items: flex-end;
+
+  }
+
+}
+
