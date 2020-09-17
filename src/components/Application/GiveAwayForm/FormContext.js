@@ -13,7 +13,7 @@ function FormProvider(props) {
     postData: {
       street: '',
       city: '',
-      postcode: '',
+      postcode: ' ',
       phone: ''
     },
     courierData: {

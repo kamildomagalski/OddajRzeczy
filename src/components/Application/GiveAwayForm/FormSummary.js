@@ -20,7 +20,7 @@ function FormSummary() {
         <h2>Adres odbioru:</h2>
         <h3>Ulica: {formData.postData.street}</h3>
         <h3>Miasto: {formData.postData.city}</h3>
-        <h3>Kod pocztowy: {formData.postData.postalCode}</h3>
+        <h3>Kod pocztowy: {formData.postData.postcode}</h3>
         <h3>Numer telefonu: {formData.postData.phone}</h3>
       </div>
       <div>
