@@ -9,6 +9,7 @@ import ContactSection from "./ContactSection";
 
 
 function Home() {
+
  return (
   <>
   <MainSection/>

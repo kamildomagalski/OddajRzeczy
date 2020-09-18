@@ -39,7 +39,7 @@ function LogInForm({firebase, history}) {
           password: '',
           error: null
         });
-        history.push('/app');
+        history.push('/');
       })
       .catch(error => {
         setLogInState({

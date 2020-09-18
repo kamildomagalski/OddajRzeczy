@@ -9,19 +9,6 @@
   flex-direction: column;
   align-items: flex-end;
 
-  .backgroundFilter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.60);
-    height: 100vh;
-    width: 100%;
-    @include desktop{
-      align-items: flex-end;
-
-    }
-  }
-
   .header {
     position: relative;
     display: flex;
@@ -42,7 +29,19 @@
     margin: 37px 0 17px;
     @include desktop {
       display: flex;
+      align-items: center;
     }
+  }
+&__loading{
+  height: 35px;
+  margin: 37px 0 17px;
+
+}
+  &__userEmail {
+    font-family: $font-base;
+    color: $color-dark;
+    font-size: 1.3rem;
+    margin-right: 20px;
   }
 
   .menu {
@@ -85,7 +84,8 @@
         font-size: 1.8rem;
       }
     }
-    &__link{
+
+    &__link {
       cursor: pointer;
 
     }
@@ -98,7 +98,7 @@
     justify-content: center;
     height: 100vh;
     padding: 20px;
-    @include desktop{
+    @include desktop {
       margin-right: 175px;
 
     }
@@ -117,7 +117,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      @include desktop{
+      @include desktop {
         flex-direction: row;
         justify-content: space-between;
 

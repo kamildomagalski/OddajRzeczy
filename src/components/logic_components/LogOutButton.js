@@ -2,9 +2,9 @@ import React from 'react';
 import { withFirebase } from "../Firebase";
 import {Link} from "react-router-dom";
 
-function LogOutButton({ firebase }) {
+function LogOutButton({ firebase, className}) {
  return (
-  <Link to={'/'} type={'button'} onClick={firebase.doSignOut}>
+  <Link to={'/'} type={'button'} className={ className } onClick={firebase.doSignOut}>
    Sign Out
   </Link>
  );
