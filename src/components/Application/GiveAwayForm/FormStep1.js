@@ -3,7 +3,7 @@ import {FormContext} from "./FormContext";
 
 function FormStep1() {
   
-  const {formData, setFormData} = useContext(FormContext)
+  const {formData, handleSetData} = useContext(FormContext)
   
   const [type, setType] = useState(formData.type)
   
@@ -14,11 +14,10 @@ function FormStep1() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    setFormData(prevState => ({
-      ...prevState,
-      type: type,
-      step: 2
-    }));
+    handleSetData({
+      type,
+      step:2
+    })
   }
   
   

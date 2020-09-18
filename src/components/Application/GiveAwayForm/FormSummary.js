@@ -5,19 +5,31 @@ function FormSummary() {
   
   const {formData, setStep} = useContext(FormContext)
   
+  const translateHelpGroup = {
+    singleMother: 'samotnym matkom',
+    children: 'dzieciom',
+    homeless: 'bezdomnym',
+    disabledPeople: 'niepełnosprawnym',
+    elderly: 'osobom starszym'
+  }
+  
+  const helpGroups = Object.keys(formData.helpGroups)
+    .filter(el => formData.helpGroups[el])
+    .map(el => translateHelpGroup[el])
+    .join(", ")
+  
   const handlePrevPage = () => {
     setStep(4);
   }
   if (formData.step !== 5) return null
-  
+
   return (
     <section className={'formStep'}>
       <div className={'container'}>
         <h1 className={'formStep__title'}>Podsumowanie Twojej darowizny</h1>
         <h2 className={'formStep__subtitle'}> Oddajesz:</h2>
-        <p className={'formStep__text'}>{formData.bags} worki/-ów, {formData.type},
-        </p>
-        <p className={'formStep__text'}>Dla lokalizacji: {formData.localization}</p>
+        <p className={'formStep__text'}>{formData.bags} worki/-ów, {formData.type},{helpGroups}</p>
+        <p className={'formStep__text'}>Dla lokalizacji: {formData.localization}, {formData.localizationSpecific}</p>
         <div className={'formStep__wrapper'}>
           
           <div className={'formStep__column'}>
@@ -38,7 +50,7 @@ function FormSummary() {
           <button onClick={handlePrevPage} type={"button"}
                   className={'btn btn-small btn-border formStep__btn'}>Wstecz
           </button>
-          <button  type={"button"} className={'btn btn-small btn-border formStep__btn'}>Potwierdzam
+          <button type={"button"} className={'btn btn-small btn-border formStep__btn'}>Potwierdzam
           </button>
         </div>
       </div>

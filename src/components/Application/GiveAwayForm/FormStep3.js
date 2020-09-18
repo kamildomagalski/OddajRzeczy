@@ -2,36 +2,36 @@ import React, {useState, useContext} from 'react';
 import {FormContext} from "./FormContext";
 
 function FormStep3() {
-  const {formData, setData, setFormData, setStep} = useContext(FormContext)
+  const {formData, handleSetData, setStep} = useContext(FormContext)
   
   const [localization, setLocalization] = useState(formData.localization)
   const [localizationSpecific, setLocalizationSpecific] = useState(formData.localizationSpecific)
   const [helpGroups, setHelpGroups] = useState(formData.helpGroups)
   
-  const handleChange = (e) => {
+  const handleLocalChange = (e) => {
     setLocalization(e.target.value)
+  }
+  const handleLocalSpecChange = (e) => {
     setLocalizationSpecific(e.target.value)
   }
   const handleCheckboxChange = (e) => {
-   const name = e.target.name
+    const name = e.target.name
     const value = e.target.checked
     
-    setHelpGroups({
-      [name] : value
-    })
+    setHelpGroups(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
   }
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setFormData(prevState => ({
-    //   ...prevState,
-    //   localization: localization,
-    //   step: 4
-    // }))
-    setData(localization);
-    setData(localizationSpecific);
-    setData(helpGroups)
-    setStep(4);
+    handleSetData({
+      helpGroups,
+      localization,
+      localizationSpecific,
+      step: 4
+    })
   }
   
   const handlePrevPage = () => {
@@ -54,7 +54,7 @@ function FormStep3() {
         <h1 className={'formStep__title'}>Lokalizacja:</h1>
         <form className={'formStep__form'} onSubmit={handleSubmit}>
           <label className={'formStep__label'}>Lokalizacja:
-            <select value={localization} onChange={handleChange} className={'formStep__select'}>
+            <select value={localization} onChange={handleLocalChange} className={'formStep__select'}>
               {/*<option value={null}>Wybierz</option>*/}
               <option value={'Poznań'} className={'formStep__option'}>Poznań</option>
               <option value={'Warszawa'} className={'formStep__option'}>Warszawa</option>
@@ -65,28 +65,33 @@ function FormStep3() {
           </label>
           <h2 className={'formStep__subtitle'}>Komu chcesz pomóc?</h2>
           <label className={'formStep__label'}> dzieciom
-            <input name={'dzieciom'}
+            <input name={'children'}
                    type={'checkbox'}
+                   onChange={handleCheckboxChange}
             />
           </label>
           <label className={'formStep__label'}> samotnym matkom
-            <input name={'bezdomnym'}
+            <input name={'singleMother'}
                    type={'checkbox'}
+                   onChange={handleCheckboxChange}
             />
           </label>
           <label className={'formStep__label'}> bezdomnym
-            <input name={'niepełnosprawnym'}
+            <input name={'homeless'}
                    type={'checkbox'}
+                   onChange={handleCheckboxChange}
             />
           </label>
           <label className={'formStep__label'}> niepełnosprawnym
-            <input name={'niepełnosprawnym'}
+            <input name={'disabledPeople'}
                    type={'checkbox'}
+                   onChange={handleCheckboxChange}
             />
           </label>
           <label className={'formStep__label'}> osobom starszym
-            <input name={'niepełnosprawnym'}
+            <input name={'elderly'}
                    type={'checkbox'}
+                   onChange={handleCheckboxChange}
             />
           </label>
           <h2 className={'formStep__subtitle'}>Wpisz nazwę konkretnej organizacji (opcjonalnie)</h2>
@@ -94,7 +99,7 @@ function FormStep3() {
             <input name={'localizationSpecific'}
                    value={localizationSpecific}
                    type={'text'}
-                   onChange={handleChange}
+                   onChange={handleLocalSpecChange}
                    className={'formStep__input'}
             />
           </label>

@@ -29,7 +29,7 @@ function FormProvider(props) {
     }
 
   })
-  const setData= (data)=> {
+  const handleSetData= (data)=> {
     setFormData(prevState => ({
       ...prevState,
       ...data
@@ -46,7 +46,7 @@ function FormProvider(props) {
   
   
  return (
-  <FormContext.Provider value={{formData, setFormData, setData, setStep}}>
+  <FormContext.Provider value={{formData, setFormData, handleSetData, setStep}}>
     {props.children}
   </FormContext.Provider>
  );

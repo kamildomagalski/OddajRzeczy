@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import {FormContext} from "./FormContext";
 
 function FormStep4() {
-  const {formData, setFormData, setStep} = useContext(FormContext)
+  const {formData, setStep, handleSetData} = useContext(FormContext)
   const [postData, setPostData] = useState(formData.postData)
   const [courierData, setCourierData] = useState(formData.courierData)
   
@@ -28,17 +28,15 @@ function FormStep4() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    setFormData(prevState => ({
-      ...prevState,
-      postData: postData,
-      courierData: courierData,
-    }))
-    setFormData(prevState => ({
-      ...prevState,
-      courierData: courierData,
+    handleSetData({
+      postData: {
+        ...postData
+      },
+      courierData: {
+        ...courierData
+      },
       step: 5
-    }))
-    
+    })
   }
   const handlePrevPage = () => {
     setStep(3);

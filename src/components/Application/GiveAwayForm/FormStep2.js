@@ -3,7 +3,7 @@ import {FormContext} from "./FormContext";
 
 function FormStep2() {
   const [bags, setBags] = useState('')
-  const {formData, setFormData, setStep} = useContext(FormContext)
+  const {formData, setStep, handleSetData} = useContext(FormContext)
   
   const handleChange = (e) => {
     setBags(e.target.value)
@@ -11,11 +11,10 @@ function FormStep2() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
-    setFormData(prevState => ({
-      ...prevState,
-      bags: bags,
-      step: 3
-    }));
+    handleSetData({
+      bags,
+      step:3
+    })
   }
   
   const handlePrevPage = () => {
