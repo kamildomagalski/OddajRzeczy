@@ -24,6 +24,16 @@
     font-weight: 600;
     margin: 0 0 30px;
   }
+&__wrapper{
+  display: flex;
+
+}
+  &__column{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+  }
 
   &__form {
     display: flex;
@@ -36,6 +46,10 @@
     margin: 10px 0;
     font-size: 1.8rem;
     font-weight: 300;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
   }
 
   &__radio {
@@ -50,7 +64,7 @@
 
   }
   &__input {
-
+width: 150px;
   }
 
   &__buttons {
