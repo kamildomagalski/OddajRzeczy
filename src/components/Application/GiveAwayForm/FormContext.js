@@ -9,7 +9,13 @@ function FormProvider(props) {
     bags: '',
     localization:'',
     localizationSpecific: '',
-    helpGroups: [],
+    helpGroups: {
+      children: false,
+      singleMother: false,
+      homeless: false,
+      disabledPeople: false,
+      elderly: false
+    },
     postData: {
       street: '',
       city: '',

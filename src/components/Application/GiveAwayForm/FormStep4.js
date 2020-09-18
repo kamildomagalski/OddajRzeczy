@@ -17,7 +17,7 @@ function FormStep4() {
     })
   }
   const handleCourierChange = (event) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     setCourierData(prevState => {
       return {
         ...prevState,

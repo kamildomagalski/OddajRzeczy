@@ -41,35 +41,35 @@ function FormStep1() {
             <input type={'radio'} value={'ubrania do ponownego użycia'}
                    checked={type === 'ubrania do ponownego użycia'}
                    onChange={handleChange}
-                   className={'formStep__input'}/>
+                   className={'formStep__radio'}/>
             Ubrania do ponownego użycia
           </label>
           <label className={'formStep__label'}>
             <input type={'radio'} value={'ubrania do wyrzucenia'}
                    checked={type === 'ubrania do wyrzucenia'}
                    onChange={handleChange}
-                   className={'formStep__input'}/>
+                   className={'formStep__radio'}/>
             Ubrania do wyrzucenia
           </label>
           <label className={'formStep__label'}>
             <input type={'radio'} value={'zabawki'}
                    checked={type === 'zabawki'}
                    onChange={handleChange}
-                   className={'formStep__input'}/>
+                   className={'formStep__radio'}/>
             Zabawki
           </label>
           <label className={'formStep__label'}>
             <input type={'radio'} value={'książki'}
                    checked={type === 'książki'}
                    onChange={handleChange}
-                   className={'formStep__input'}/>
+                   className={'formStep__radio'}/>
             Książki
           </label>
           <label className={'formStep__label'}>
             <input type={'radio'} value={'inne'}
                    checked={type === 'inne'}
                    onChange={handleChange}
-                   className={'formStep__input'}/>
+                   className={'formStep__radio'}/>
             Inne
           </label>
           <div className={'formStep__buttons'}>
