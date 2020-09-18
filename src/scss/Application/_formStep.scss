@@ -19,16 +19,25 @@
     font-weight: 600;
     margin: 0 0 30px;
   }
-  &__subtitle{
+
+  &__subtitle {
     font-size: 2.2rem;
     font-weight: 600;
     margin: 0 0 30px;
   }
-&__wrapper{
-  display: flex;
 
-}
-  &__column{
+  &__text {
+    font-size: 1.8rem;
+    font-weight: 400;
+
+  }
+
+  &__wrapper {
+    display: flex;
+
+  }
+
+  &__column {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -63,8 +72,9 @@
   &__option {
 
   }
+
   &__input {
-width: 150px;
+    width: 150px;
   }
 
   &__buttons {
@@ -76,7 +86,10 @@ width: 150px;
 
   &__btn {
     margin-right: 15px;
-    width: 80px;
+    min-width: 80px;
+    padding-right: 20px;
+    padding-left: 20px;
+
   }
 }
 

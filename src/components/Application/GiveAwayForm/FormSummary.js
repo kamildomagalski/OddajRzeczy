@@ -1,36 +1,48 @@
-import React, { useContext } from 'react';
-import { FormContext } from "./FormContext";
+import React, {useContext} from 'react';
+import {FormContext} from "./FormContext";
 
 function FormSummary() {
   
-  const {formData} = useContext(FormContext)
+  const {formData, setStep} = useContext(FormContext)
   
+  const handlePrevPage = () => {
+    setStep(4);
+  }
   if (formData.step !== 5) return null
   
   return (
-    <>
-      <h1 className={'appPulpit__title'}>Podsumowanie</h1>
-      <h2> Oddajesz:</h2>
-      <h3>{formData.bags} worków, {formData.type},
-        {formData.helpGroups.map((el)=> {
-          return el
-        })}</h3>
-      <h3>Dla lokalizacji: {formData.localization}</h3>
-      <div>
-        <h2>Adres odbioru:</h2>
-        <h3>Ulica: {formData.postData.street}</h3>
-        <h3>Miasto: {formData.postData.city}</h3>
-        <h3>Kod pocztowy: {formData.postData.postcode}</h3>
-        <h3>Numer telefonu: {formData.postData.phone}</h3>
+    <section className={'formStep'}>
+      <div className={'container'}>
+        <h1 className={'formStep__title'}>Podsumowanie Twojej darowizny</h1>
+        <h2 className={'formStep__subtitle'}> Oddajesz:</h2>
+        <p className={'formStep__text'}>{formData.bags} worki/-ów, {formData.type},
+        </p>
+        <p className={'formStep__text'}>Dla lokalizacji: {formData.localization}</p>
+        <div className={'formStep__wrapper'}>
+          
+          <div className={'formStep__column'}>
+            <h2 className={'formStep__subtitle'}>Adres odbioru:</h2>
+            <h3 className={'formStep__text'}>Ulica {formData.postData.street}</h3>
+            <h3 className={'formStep__text'}>Miasto {formData.postData.city}</h3>
+            <h3 className={'formStep__text'}>Kod pocztowy {formData.postData.postcode}</h3>
+            <h3 className={'formStep__text'}>Numer telefonu {formData.postData.phone}</h3>
+          </div>
+          <div className={'formStep__column'}>
+            <h2 className={'formStep__subtitle'}>Termin odbioru:</h2>
+            <h3 className={'formStep__text'}>Data: {formData.courierData.date}</h3>
+            <h3 className={'formStep__text'}>Godzina: {formData.courierData.time}</h3>
+            <h3 className={'formStep__text'}>Uwagi: {formData.courierData.note}</h3>
+          </div>
+        </div>
+        <div className={'formStep__buttons'}>
+          <button onClick={handlePrevPage} type={"button"}
+                  className={'btn btn-small btn-border formStep__btn'}>Wstecz
+          </button>
+          <button  type={"button"} className={'btn btn-small btn-border formStep__btn'}>Potwierdzam
+          </button>
+        </div>
       </div>
-      <div>
-        <h2>Termin odbioru:</h2>
-        <h3>Data: {formData.courierData.date}</h3>
-        <h3>Godzina: {formData.courierData.time}</h3>
-        <h3>Uwagi: {formData.courierData.note}</h3>
-      </div>
-
-    </>
+    </section>
   );
 }
 
