@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-margin-bottom: 100px;
+
   }
 
   &__label {
@@ -34,7 +34,25 @@ margin-bottom: 100px;
   }
 
   &__input {
-width: 20px;
+    width: 20px;
+  }
+
+  &__select {
+
+  }
+
+  &__option {
+
+  }
+
+  &__buttons {
+    display: flex;
+    margin-top: 100px;
+  }
+
+  &__btn {
+    margin-right: 15px;
+    width: 80px;
   }
 }
 
@@ -49,12 +67,13 @@ width: 20px;
   top: 0;
   background-color: $color-yellow;
 
-.container{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
   &__title {
     font-size: 2.0rem;
     font-weight: 600;

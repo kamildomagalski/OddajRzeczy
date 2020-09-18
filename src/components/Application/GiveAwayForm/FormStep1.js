@@ -72,8 +72,11 @@ function FormStep1() {
                    className={'formStep__input'}/>
             Inne
           </label>
+          <div className={'formStep__buttons'}>
+            <button onClick={handleSubmit} type={"submit"} className={'btn btn-small btn-border formStep__btn'}>Dalej</button>
+          </div>
         </form>
-        <button onClick={handleSubmit} type={"submit"} className={'btn btn-small'}>Dalej</button>
+        
       </div>
     </section>
   );
