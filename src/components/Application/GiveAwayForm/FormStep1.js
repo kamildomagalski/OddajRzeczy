@@ -16,7 +16,7 @@ function FormStep1() {
     event.preventDefault();
     handleSetData({
       type,
-      step:2
+      step: 2
     })
   }
   
@@ -36,46 +36,52 @@ function FormStep1() {
         <p className={'formStep__counter'}>Krok {formData.step}/4</p>
         <h1 className={'formStep__title'}>Zaznacz co chcesz oddać</h1>
         <form className={'formStep__form'} onSubmit={handleSubmit}>
-          <label className={'formStep__label'}>
+          <label className={'formStep__label formStep__label-step1'}>
             <input type={'radio'} value={'ubrania do ponownego użycia'}
                    checked={type === 'ubrania do ponownego użycia'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            Ubrania do ponownego użycia
+            <span className={'customCheckbox'}/>
+            ubrania do ponownego użycia
           </label>
-          <label className={'formStep__label'}>
+          <label className={'formStep__label formStep__label-step1'}>
             <input type={'radio'} value={'ubrania do wyrzucenia'}
                    checked={type === 'ubrania do wyrzucenia'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            Ubrania do wyrzucenia
+            <span className={'customCheckbox'}/>
+            ubrania do wyrzucenia
           </label>
-          <label className={'formStep__label'}>
+          <label className={'formStep__label formStep__label-step1'}>
             <input type={'radio'} value={'zabawki'}
                    checked={type === 'zabawki'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            Zabawki
+            <span className={'customCheckbox'}/>
+            zabawki
           </label>
-          <label className={'formStep__label'}>
+          <label className={'formStep__label formStep__label-step1'}>
             <input type={'radio'} value={'książki'}
                    checked={type === 'książki'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            Książki
+            <span className={'customCheckbox'}/>
+            książki
           </label>
-          <label className={'formStep__label'}>
+          <label className={'formStep__label formStep__label-step1'}>
             <input type={'radio'} value={'inne'}
                    checked={type === 'inne'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            Inne
+            <span className={'customCheckbox'}/>
+            inne
           </label>
           <div className={'formStep__buttons'}>
-            <button onClick={handleSubmit} type={"submit"} className={'btn btn-small btn-border formStep__btn'}>Dalej</button>
+            <button onClick={handleSubmit} type={"submit"} className={'btn btn-small btn-border formStep__btn'}>Dalej
+            </button>
           </div>
         </form>
-        
+      
       </div>
     </section>
   );
