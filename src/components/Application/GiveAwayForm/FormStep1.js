@@ -41,7 +41,7 @@ function FormStep1() {
                    checked={type === 'ubrania do ponownego użycia'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            <span className={'customCheckbox'}/>
+            <span className={'customRadio'}/>
             ubrania do ponownego użycia
           </label>
           <label className={'formStep__label formStep__label-step1'}>
@@ -49,7 +49,7 @@ function FormStep1() {
                    checked={type === 'ubrania do wyrzucenia'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            <span className={'customCheckbox'}/>
+            <span className={'customRadio'}/>
             ubrania do wyrzucenia
           </label>
           <label className={'formStep__label formStep__label-step1'}>
@@ -57,7 +57,7 @@ function FormStep1() {
                    checked={type === 'zabawki'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            <span className={'customCheckbox'}/>
+            <span className={'customRadio'}/>
             zabawki
           </label>
           <label className={'formStep__label formStep__label-step1'}>
@@ -65,7 +65,7 @@ function FormStep1() {
                    checked={type === 'książki'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            <span className={'customCheckbox'}/>
+            <span className={'customRadio'}/>
             książki
           </label>
           <label className={'formStep__label formStep__label-step1'}>
@@ -73,7 +73,7 @@ function FormStep1() {
                    checked={type === 'inne'}
                    onChange={handleChange}
                    className={'formStep__radio'}/>
-            <span className={'customCheckbox'}/>
+            <span className={'customRadio'}/>
             inne
           </label>
           <div className={'formStep__buttons'}>

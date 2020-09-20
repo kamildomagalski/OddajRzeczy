@@ -54,8 +54,7 @@ function FormStep3() {
         <h1 className={'formStep__title'}>Lokalizacja:</h1>
         <form className={'formStep__form'} onSubmit={handleSubmit}>
           <label className={'formStep__label'}>Lokalizacja:
-            <select value={localization} onChange={handleLocalChange} className={'formStep__select'}>
-              {/*<option value={null}>Wybierz</option>*/}
+            <select value={localization} onChange={handleLocalChange} className={'formStep__select formStep__select-step3'}>
               <option value={'Poznań'} className={'formStep__option'}>Poznań</option>
               <option value={'Warszawa'} className={'formStep__option'}>Warszawa</option>
               <option value={'Kraków'} className={'formStep__option'}>Kraków</option>
@@ -64,44 +63,52 @@ function FormStep3() {
             </select>
           </label>
           <h2 className={'formStep__subtitle'}>Komu chcesz pomóc?</h2>
-          <label className={'formStep__label'}> dzieciom
-            <input name={'children'}
-                   type={'checkbox'}
-                   onChange={handleCheckboxChange}
-            />
-          </label>
-          <label className={'formStep__label'}> samotnym matkom
-            <input name={'singleMother'}
-                   type={'checkbox'}
-                   onChange={handleCheckboxChange}
-            />
-          </label>
-          <label className={'formStep__label'}> bezdomnym
-            <input name={'homeless'}
-                   type={'checkbox'}
-                   onChange={handleCheckboxChange}
-            />
-          </label>
-          <label className={'formStep__label'}> niepełnosprawnym
-            <input name={'disabledPeople'}
-                   type={'checkbox'}
-                   onChange={handleCheckboxChange}
-            />
-          </label>
-          <label className={'formStep__label'}> osobom starszym
-            <input name={'elderly'}
-                   type={'checkbox'}
-                   onChange={handleCheckboxChange}
-            />
-          </label>
+          <div className={'formStep__checkboxWrapper'}>
+            <label className={'formStep__label formStep__label-step3'}>
+              <input name={'children'}
+                     type={'checkbox'}
+                     onChange={handleCheckboxChange}
+                     className={'formStep__checkbox'}
+              />
+              <span className={'customCheckbox'}>dzieciom</span>
+            </label>
+            <label className={'formStep__label formStep__label-step3'}>
+              <input name={'singleMother'}
+                     type={'checkbox'}
+                     onChange={handleCheckboxChange}
+                     className={'formStep__checkbox'}
+              />
+              <span className={'customCheckbox'}>samotnym matkom</span>
+            </label>
+            <label className={'formStep__label formStep__label-step3'}>
+              <input name={'homeless'}
+                     type={'checkbox'}
+                     onChange={handleCheckboxChange}
+                     className={'formStep__checkbox'}/>
+              <span className={'customCheckbox'}>bezdomnym</span>
+            </label>
+            <label className={'formStep__label formStep__label-step3'}>
+              <input name={'disabledPeople'}
+                     type={'checkbox'}
+                     onChange={handleCheckboxChange}
+                     className={'formStep__checkbox'}/>
+              <span className={'customCheckbox'}>niepełnosprawnym</span>
+            </label>
+            <label className={'formStep__label formStep__label-step3'}>
+              <input name={'elderly'}
+                     type={'checkbox'}
+                     onChange={handleCheckboxChange}
+                     className={'formStep__checkbox'}/>
+              <span className={'customCheckbox'}>osobom starszym</span>
+            </label>
+          </div>
           <h2 className={'formStep__subtitle'}>Wpisz nazwę konkretnej organizacji (opcjonalnie)</h2>
-          <label className={'formStep__label'}>
+          <label className={'formStep__label formStep__label-localSpec'}>
             <input name={'localizationSpecific'}
                    value={localizationSpecific}
                    type={'text'}
                    onChange={handleLocalSpecChange}
-                   className={'formStep__input'}
-            />
+                   className={'formStep__input formStep__input-step3 '}/>
           </label>
           <div className={'formStep__buttons'}>
             <button onClick={handlePrevPage} type={"button"}
