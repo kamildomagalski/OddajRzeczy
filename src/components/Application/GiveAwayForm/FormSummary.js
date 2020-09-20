@@ -21,6 +21,10 @@ function FormSummary() {
   const handlePrevPage = () => {
     setStep(4);
   }
+  
+  const handleConfirm = () =>{
+    setStep(6)
+  }
   if (formData.step !== 5) return null
 
   return (
@@ -50,7 +54,7 @@ function FormSummary() {
           <button onClick={handlePrevPage} type={"button"}
                   className={'btn btn-small btn-border formStep__btn'}>Wstecz
           </button>
-          <button type={"button"} className={'btn btn-small btn-border formStep__btn'}>Potwierdzam
+          <button onClick={handleConfirm} type={"button"} className={'btn btn-small btn-border formStep__btn'}>Potwierdzam
           </button>
         </div>
       </div>
