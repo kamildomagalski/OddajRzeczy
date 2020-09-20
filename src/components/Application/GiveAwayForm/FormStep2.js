@@ -35,10 +35,10 @@ function FormStep2() {
         <p className={'formStep__counter'}>Krok {formData.step}/4</p>
         <h1 className={'formStep__title'}>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h1>
         <form className={'formStep__form'} onSubmit={handleSubmit}>
-          <label className={'formStep__label'}>
+          <label className={'formStep__label formStep__label-step2'}>
             Liczba 60l worków:
-            <select value={bags} onChange={handleChange} className={'formStep__select'}>
-              <option>Wybierz</option>
+            <select value={bags} onChange={handleChange} className={'formStep__select formStep__select-step2'}>
+              {/*<option>--wybierz--</option>*/}
               <option value={1} className={'formStep__option'}>1</option>
               <option value={2} className={'formStep__option'}>2</option>
               <option value={3} className={'formStep__option'}>3</option>

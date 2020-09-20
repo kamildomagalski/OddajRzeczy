@@ -57,12 +57,12 @@
   }
 
   &__label {
-    margin: 10px 0;
-    font-size: 1.8rem;
-    font-weight: 300;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 10px 0;
+    font-size: 1.8rem;
+    font-weight: 300;
     width: 300px;
     cursor: pointer;
 
@@ -70,6 +70,13 @@
       justify-content: flex-start;
       margin: 15px 0;
     }
+
+    &-step2 {
+      justify-content: flex-start;
+      margin: 15px 0;
+      width: 400px;
+    }
+
   }
 
   &__radio {
@@ -100,9 +107,18 @@
 
   &__select {
 
+    &-step2 {
+      width: 170px;
+      height: 35px;
+      margin-left: 20px;
+      background-color: transparent;
+      text-align: center;
+
+    }
   }
 
   &__option {
+
 
   }
 
