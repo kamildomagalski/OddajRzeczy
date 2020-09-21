@@ -23,7 +23,7 @@ function FormStep2() {
   
   if (formData.step !== 2) return null
   return (
-    <section className={'formStep'}>
+    <section className={'formStep2'}>
       <div className={'warning'}>
         <div className={'container'}>
           <h2 className={'warning__title'}>Ważne!</h2>
@@ -32,18 +32,18 @@ function FormStep2() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep__counter'}>Krok {formData.step}/4</p>
-        <h1 className={'formStep__title'}>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h1>
-        <form className={'formStep__form'} onSubmit={handleSubmit}>
-          <label className={'formStep__label formStep__label-step2'}>
+        <p className={'formStep2__counter'}>Krok {formData.step}/4</p>
+        <h1 className={'formStep2__title'}>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h1>
+        <form className={'formStep2__form'} onSubmit={handleSubmit}>
+          <label className={'formStep2__label'}>
             Liczba 60l worków:
-            <select value={bags} onChange={handleChange} className={'formStep__select formStep__select-step2'}>
+            <select value={bags} onChange={handleChange} className={'formStep2__select'}>
               {/*<option>--wybierz--</option>*/}
-              <option value={1} className={'formStep__option'}>1</option>
-              <option value={2} className={'formStep__option'}>2</option>
-              <option value={3} className={'formStep__option'}>3</option>
-              <option value={4} className={'formStep__option'}>4</option>
-              <option value={5} className={'formStep__option'}>5</option>
+              <option value={1} className={'formStep2__option'}>1</option>
+              <option value={2} className={'formStep2__option'}>2</option>
+              <option value={3} className={'formStep2__option'}>3</option>
+              <option value={4} className={'formStep2__option'}>4</option>
+              <option value={5} className={'formStep2__option'}>5</option>
             </select>
           </label>
           <div className={'formStep__buttons'}>

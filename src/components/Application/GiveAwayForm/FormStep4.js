@@ -44,7 +44,7 @@ function FormStep4() {
   if (formData.step !== 4) return null
   
   return (
-    <section className={'formStep'}>
+    <section className={'formStep4'}>
       <div className={'warning'}>
         <div className={'container'}>
           <h2 className={'warning__title'}>Ważne!</h2>
@@ -52,69 +52,69 @@ function FormStep4() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep__counter'}>Krok {formData.step}/4</p>
-        <h1 className={'formStep__title'}>Podaj adres oraz termin odbioru rzecz przez kuriera</h1>
-        <form className={'formStep__form'}>
-          <div className={'formStep__wrapper'}>
-            <div className={'formStep__column'}>
-              <h2 className={'formStep__subtitle'}>Adres odbioru:</h2>
-              <label className={'formStep__label formStep__label-step4'}>
+        <p className={'formStep4__counter'}>Krok {formData.step}/4</p>
+        <h1 className={'formStep4__title'}>Podaj adres oraz termin odbioru rzecz przez kuriera</h1>
+        <form className={'formStep4__form'}>
+          <div className={'formStep4__wrapper'}>
+            <div className={'formStep4__column'}>
+              <h2 className={'formStep4__subtitle'}>Adres odbioru:</h2>
+              <label className={'formStep4__label'}>
                 Ulica
                 <input name={'street'}
                        value={postData.street}
                        onChange={handlePostChange}
                        type={'text'}
-                       className={'formStep__input formStep__input-step4'}/>
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label formStep__label-step4'}>
+              <label className={'formStep4__label'}>
                 Miasto
                 <input name={'city'}
                        value={postData.city}
                        onChange={handlePostChange}
                        type={'text'}
-                       className={'formStep__input formStep__input-step4'}/>
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label formStep__label-step4'}>
+              <label className={'formStep4__label'}>
                 Kod pocztowy
                 <input name={'postcode'}
                        value={postData.postcode}
                        onChange={handlePostChange}
                        type={'number'}
-                       className={'formStep__input formStep__input-step4'}/>
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label formStep__label-step4'}>
+              <label className={'formStep4__label'}>
                 Numer telefonu
                 <input name={'phone'}
                        value={postData.phone}
                        onChange={handlePostChange}
                        type={'number'}
-                       className={'formStep__input formStep__input-step4'}/>
+                       className={'formStep4__input'}/>
               </label>
             </div>
-            <div className={'formStep__column'}>
-              <h2 className={'formStep__subtitle'}>Termin odbioru</h2>
-              <label className={'formStep__label formStep__label-step4'}>
+            <div className={'formStep4__column'}>
+              <h2 className={'formStep4__subtitle'}>Termin odbioru</h2>
+              <label className={'formStep4__label'}>
                 Data
                 <input name={'date'}
                        value={courierData.date}
                        onChange={handleCourierChange}
                        type={'number'}
-                       className={'formStep__input formStep__input-step4'}/>
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label formStep__label-step4'}>
+              <label className={'formStep4__label'}>
                 Godzina
                 <input name={'time'}
                        value={courierData.time}
                        onChange={handleCourierChange}
                        type={'text'}
-                       className={'formStep__input formStep__input-step4'}/>
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label formStep__label-step4'}>
+              <label className={'formStep4__label'}>
                 Uwagi dla  kuriera
                 <textarea name={'note'}
                        value={courierData.note}
                        onChange={handleCourierChange}
-                       className={'formStep__input formStep__input-step4 formStep__textarea'}/>
+                       className={'formStep4__input formStep4__input-textarea'}/>
               </label>
             </div>
           </div>
