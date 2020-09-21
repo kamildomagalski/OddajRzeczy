@@ -25,11 +25,11 @@ function FormSummary() {
     setStep(4);
   }
   
-  const handleConfirm = () =>{
+  const handleConfirm = () => {
     setStep(6)
   }
   if (formData.step !== 5) return null
-
+  
   return (
     <section className={'formSummary'}>
       <div className={'container'}>
@@ -41,28 +41,59 @@ function FormSummary() {
         </div>
         <div className={'formSummary__giveAway'}>
           <img className={'formSummary__icons'} src={arrowsIcon} alt={'Arrows'}/>
-          <p className={'formSummary__info'}>Dla lokalizacji: {formData.localization}, {formData.localizationSpecific}</p>
+          <p className={'formSummary__info'}>Dla
+            lokalizacji: {formData.localization}, {formData.localizationSpecific}</p>
         </div>
         <div className={'formSummary__wrapper'}>
           <div className={'formSummary__column'}>
             <h2 className={'formSummary__subtitle'}>Adres odbioru:</h2>
-            <h3 className={'formSummary__text'}>Ulica {formData.postData.street}</h3>
-            <h3 className={'formSummary__text'}>Miasto {formData.postData.city}</h3>
-            <h3 className={'formSummary__text'}>Kod pocztowy {formData.postData.postcode}</h3>
-            <h3 className={'formSummary__text'}>Numer telefonu {formData.postData.phone}</h3>
+            <table>
+              <tbody>
+              <tr className={'formSummary__tableRow'}>
+                <td className={'formSummary__tableData formSummary__tableData-title'}>Ulica</td>
+                <td className={'formSummary__tableData'}>{formData.postData.street}</td>
+              </tr>
+              <tr className={'formSummary__tableRow'}>
+                <td className={'formSummary__tableData formSummary__tableData-title'}>Miasto</td>
+                <td className={'formSummary__tableData'}>{formData.postData.city}</td>
+              </tr>
+              <tr className={'formSummary__tableRow'}>
+                <td className={'formSummary__tableData formSummary__tableData-title'}>Kod pocztowy</td>
+                <td className={'formSummary__tableData'}>{formData.postData.postcode}</td>
+              </tr>
+              <tr className={'formSummary__tableRow'}>
+                <td className={'formSummary__tableData formSummary__tableData-title'}>Numer telefonu</td>
+                <td className={'formSummary__tableData'}>{formData.postData.phone}</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
           <div className={'formSummary__column'}>
             <h2 className={'formSummary__subtitle'}>Termin odbioru:</h2>
-            <h3 className={'formSummary__text'}>Data: {formData.courierData.date}</h3>
-            <h3 className={'formSummary__text'}>Godzina: {formData.courierData.time}</h3>
-            <h3 className={'formSummary__text'}>Uwagi: {formData.courierData.note}</h3>
+            <table>
+              <tbody>
+              <tr className={'formSummary__tableRow'}>
+                <td className={'formSummary__tableData formSummary__tableData-title'}>Data</td>
+                <td className={'formSummary__tableData'}>{formData.courierData.date}</td>
+              </tr>
+              <tr className={'formSummary__tableRow'}>
+                <td className={'formSummary__tableData formSummary__tableData-title'}>Godzina</td>
+                <td className={'formSummary__tableData'}>{formData.courierData.time}</td>
+              </tr>
+              <tr className={'formSummary__tableRow'}>
+                <td className={'formSummary__tableData formSummary__tableData-title'}>Uwagi dla kuriera</td>
+                <td className={'formSummary__tableData'}>{formData.courierData.note}</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div className={'formSummary__buttons'}>
           <button onClick={handlePrevPage} type={"button"}
                   className={'btn btn-small btn-border formSummary__btn'}>Wstecz
           </button>
-          <button onClick={handleConfirm} type={"button"} className={'btn btn-small btn-border formStep__btn'}>Potwierdzam
+          <button onClick={handleConfirm} type={"button"}
+                  className={'btn btn-small btn-border formStep__btn'}>Potwierdzam
           </button>
         </div>
       </div>
