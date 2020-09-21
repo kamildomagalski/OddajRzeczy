@@ -13,7 +13,7 @@ function FormStep2() {
     event.preventDefault();
     handleSetData({
       bags,
-      step:3
+      step: 3
     })
   }
   
@@ -21,7 +21,9 @@ function FormStep2() {
     setStep(1)
   }
   
+  
   if (formData.step !== 2) return null
+  
   return (
     <section className={'formStep2'}>
       <div className={'warning'}>
@@ -47,8 +49,11 @@ function FormStep2() {
             </select>
           </label>
           <div className={'formStep__buttons'}>
-            <button onClick={handlePrevPage} type={"button"} className={'btn btn-small btn-border formStep__btn'}>Wstecz</button>
-            <button onClick={handleSubmit} type={"submit"} className={'btn btn-small btn-border formStep__btn'}>Dalej</button>
+            <button onClick={handlePrevPage} type={"button"}
+                    className={'btn btn-small btn-border formStep__btn'}>Wstecz
+            </button>
+            <button onClick={handleSubmit} type={"submit"} className={'btn btn-small btn-border formStep__btn'}>Dalej
+            </button>
           </div>
         </form>
       </div>

@@ -4,9 +4,8 @@ import {FormContext} from "./FormContext";
 function FormStep1() {
   
   const {formData, handleSetData} = useContext(FormContext)
-  
   const [type, setType] = useState(formData.type)
-  
+  const [validateError, setValidateError] = useState('')
   
   const handleChange = (e) => {
     setType(e.target.value)
@@ -14,12 +13,32 @@ function FormStep1() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    if (!validate()) return;
+    clearValidate();
+    
     handleSetData({
       type,
       step: 2
     })
   }
   
+  function validate() {
+    let isValid = true
+    if (type === '') {
+      setValidateError('Musisz zaznaczyć jedno pole aby przejść dalej!')
+      isValid = false
+    }
+    return isValid;
+  }
+  
+  function validateMsgOff() {
+   return  (type !== '')
+  }
+  
+  function clearValidate(){
+    setValidateError('')
+  }
   
   if (formData.step !== 1) return null
   
@@ -76,12 +95,12 @@ function FormStep1() {
             <span className={'customRadio'}/>
             inne
           </label>
+          <p className={!validateMsgOff() ? 'warning__error' : 'warning__error disabled' }>{validateError}</p>
           <div className={'formStep__buttons'}>
             <button onClick={handleSubmit} type={"submit"} className={'btn btn-small btn-border formStep__btn'}>Dalej
             </button>
           </div>
         </form>
-      
       </div>
     </section>
   );
