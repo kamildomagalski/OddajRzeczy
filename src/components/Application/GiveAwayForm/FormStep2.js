@@ -4,6 +4,7 @@ import {FormContext} from "./FormContext";
 function FormStep2() {
   const [bags, setBags] = useState('')
   const {formData, setStep, handleSetData} = useContext(FormContext)
+  const [validateError, setValidateError] = useState('')
   
   const handleChange = (e) => {
     setBags(e.target.value)
@@ -11,6 +12,10 @@ function FormStep2() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
+  
+    if (!validate()) return;
+    clearValidate();
+    
     handleSetData({
       bags,
       step: 3
@@ -21,6 +26,22 @@ function FormStep2() {
     setStep(1)
   }
   
+  function validate() {
+    let isValid = true
+    if (bags === '') {
+      setValidateError('Wybierz ilość worków aby przejść dalej')
+      isValid = false
+    }
+    return isValid;
+  }
+  
+  function validateMsgOff() {
+    return  (bags !== '')
+  }
+  
+  function clearValidate(){
+    setValidateError('')
+  }
   
   if (formData.step !== 2) return null
   
@@ -48,6 +69,7 @@ function FormStep2() {
               <option value={5} className={'formStep2__option'}>5</option>
             </select>
           </label>
+          <p className={!validateMsgOff() ? 'warning__error' : 'warning__error disabled' }>{validateError}</p>
           <div className={'formStep__buttons'}>
             <button onClick={handlePrevPage} type={"button"}
                     className={'btn btn-small btn-border formStep__btn'}>Wstecz
