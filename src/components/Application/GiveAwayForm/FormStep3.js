@@ -7,6 +7,10 @@ function FormStep3() {
   const [localization, setLocalization] = useState(formData.localization)
   const [localizationSpecific, setLocalizationSpecific] = useState(formData.localizationSpecific)
   const [helpGroups, setHelpGroups] = useState(formData.helpGroups)
+  const [validateErrors, setValidateErrors] = useState({
+    localError: '',
+    helpGroupError: ''
+  })
   
   const handleLocalChange = (e) => {
     setLocalization(e.target.value)
@@ -26,6 +30,9 @@ function FormStep3() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!validate()) return;
+    clearValidate();
+    
     handleSetData({
       helpGroups,
       localization,
@@ -36,6 +43,51 @@ function FormStep3() {
   
   const handlePrevPage = () => {
     setStep(2);
+  }
+  
+  function validate() {
+    let isValid = true;
+    if (localizationSpecific === ''
+      && (localization === '' || localization === 'wybierz')) {
+      setValidateErrors(prevState => ({
+        ...prevState,
+        localError: 'Wybierz miasto albo wpisz konkretną organizację aby przejść dalej'
+      }))
+      isValid = false;
+    }
+    if (helpGroups.children === false &&
+      helpGroups.disabledPeople === false &&
+      helpGroups.elderly === false &&
+      helpGroups.homeless === false &&
+      helpGroups.singleMother === false) {
+      setValidateErrors(prevState => ({
+        ...prevState,
+        helpGroupError: 'Zaznacz przynajmniej jedną grupę aby przejść dalej'
+      }))
+      isValid = false;
+    }
+    return isValid;
+  }
+  
+  function clearValidate() {
+    setValidateErrors({
+      localError: '',
+      helpGroupError: '',
+      localSpecError: ''
+    })
+  }
+  
+  function validateLocalMsgOff() {
+    return (localization !== ''
+      && localization !== 'wybierz')
+  }
+  
+  function validateHelpGroupsMsgOff() {
+    return (helpGroups.children === false &&
+      helpGroups.disabledPeople === false &&
+      helpGroups.elderly === false &&
+      helpGroups.homeless === false &&
+      helpGroups.singleMother === false)
   }
   
   if (formData.step !== 3) return null
@@ -55,6 +107,7 @@ function FormStep3() {
         <form className={'formStep3__form'} onSubmit={handleSubmit}>
           <label className={'formStep3__label'}>Lokalizacja:
             <select value={localization} onChange={handleLocalChange} className={'formStep3__select'}>
+              <option value={'wybierz'}>wybierz</option>
               <option value={'Poznań'} className={'formStep3__option'}>Poznań</option>
               <option value={'Warszawa'} className={'formStep3__option'}>Warszawa</option>
               <option value={'Kraków'} className={'formStep3__option'}>Kraków</option>
@@ -62,10 +115,13 @@ function FormStep3() {
               <option value={'Katowice'} className={'formStep3__option'}>Katowice</option>
             </select>
           </label>
+          <p
+            className={!validateLocalMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.localError}</p>
           <h2 className={'formStep3__subtitle'}>Komu chcesz pomóc?</h2>
           <div className={'formStep3__checkboxWrapper'}>
             <label className={'formStep3__label'}>
               <input name={'children'}
+                     checked={helpGroups.children}
                      type={'checkbox'}
                      onChange={handleCheckboxChange}
                      className={'formStep3__checkbox'}
@@ -74,6 +130,7 @@ function FormStep3() {
             </label>
             <label className={'formStep3__label'}>
               <input name={'singleMother'}
+                     checked={helpGroups.singleMother}
                      type={'checkbox'}
                      onChange={handleCheckboxChange}
                      className={'formStep3__checkbox'}
@@ -82,6 +139,7 @@ function FormStep3() {
             </label>
             <label className={'formStep3__label'}>
               <input name={'homeless'}
+                     checked={helpGroups.homeless}
                      type={'checkbox'}
                      onChange={handleCheckboxChange}
                      className={'formStep3__checkbox'}/>
@@ -89,6 +147,7 @@ function FormStep3() {
             </label>
             <label className={'formStep3__label'}>
               <input name={'disabledPeople'}
+                     checked={helpGroups.disabledPeople}
                      type={'checkbox'}
                      onChange={handleCheckboxChange}
                      className={'formStep3__checkbox'}/>
@@ -96,12 +155,15 @@ function FormStep3() {
             </label>
             <label className={'formStep3__label'}>
               <input name={'elderly'}
+                     checked={helpGroups.elderly}
                      type={'checkbox'}
                      onChange={handleCheckboxChange}
                      className={'formStep3__checkbox'}/>
               <span className={'customCheckbox'}>osobom starszym</span>
             </label>
           </div>
+          <p
+            className={validateHelpGroupsMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.helpGroupError}</p>
           <h2 className={'formStep3__subtitle'}>Wpisz nazwę konkretnej organizacji (opcjonalnie)</h2>
           <label className={'formStep3__label formStep__label-localSpec'}>
             <input name={'localizationSpecific'}
