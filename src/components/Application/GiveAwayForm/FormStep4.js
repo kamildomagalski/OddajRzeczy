@@ -107,6 +107,7 @@ function FormStep4() {
       })
       isValid = false;
     }
+    if(courierData.date)
     return isValid;
   }
   function clearValidate(){
@@ -118,7 +119,7 @@ function FormStep4() {
     })
   }
   
-  
+  console.log(courierData.date)
   
   if (formData.step !== 4) return null
   
@@ -181,7 +182,7 @@ function FormStep4() {
                 <input name={'date'}
                        value={courierData.date}
                        onChange={handleCourierChange}
-                       type={'number'}
+                       type={'date'}
                        className={'formStep4__input'}/>
               </label>
               <label className={'formStep4__label'}>
@@ -189,7 +190,7 @@ function FormStep4() {
                 <input name={'time'}
                        value={courierData.time}
                        onChange={handleCourierChange}
-                       type={'text'}
+                       type={'time'}
                        className={'formStep4__input'}/>
               </label>
               <label className={'formStep4__label'}>
