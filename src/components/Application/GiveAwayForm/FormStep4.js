@@ -5,7 +5,14 @@ function FormStep4() {
   const {formData, setStep, handleSetData} = useContext(FormContext)
   const [postData, setPostData] = useState(formData.postData)
   const [courierData, setCourierData] = useState(formData.courierData)
-  
+  const [validateErrors, setValidateErrors] = useState({
+    streetError: '',
+    cityError: '',
+    postcodeError: '',
+    phoneNumberError: '',
+    
+    
+  })
   
   const handlePostChange = (event) => {
     const {name, value} = event.target;
@@ -28,6 +35,10 @@ function FormStep4() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
+  
+    if(!validate()) return;
+    clearValidate();
+    
     handleSetData({
       postData: {
         ...postData
@@ -41,6 +52,74 @@ function FormStep4() {
   const handlePrevPage = () => {
     setStep(3);
   }
+  // const reg = /^[0-9]*$/i;
+  // const srting = postData.postcode.replace('-', '')
+  // console.log(typeof srting);
+  // const isOk= reg.test('97400')
+  // console.log(isOk);
+  // console.log(postData.postcode.replace('-', ''));
+  
+  //todo sprawdzić działanie regex jak powyżej? dlaczego isOk wywala false?
+  
+  
+  function validate(){
+    let isValid = true;
+    if(postData.street.length < 2){
+      setValidateErrors(prevState => {
+       return {
+         ...prevState,
+         streetError: 'Nazwa ulicy musi zawierać przynajmniej dwa znaki.'
+       }})
+      isValid = false;
+    }
+    if(postData.city.length < 2 ){
+      setValidateErrors(prevState => {
+        return {
+          ...prevState,
+          cityError: 'Nazwa miasta musi zawierać co najmniej dwa znaki.'
+        }
+      })
+      isValid = false;
+    }
+    const reg = /^[0-9]+$/i;
+    if(postData.postcode.length < 6
+    || postData.postcode.charAt(3) !== '-'
+    || !(reg.test(postData.postcode.charAt(1)))
+    || !(reg.test(postData.postcode.charAt(2)))
+    || !(reg.test(postData.postcode.charAt(4)))
+    || !(reg.test(postData.postcode.charAt(5)))
+    || !(reg.test(postData.postcode.charAt(6)))
+    ){
+      setValidateErrors( prevState => {
+        return {
+          ...prevState,
+          postcodeError: 'Kod pocztory musi zawierać cyfry i być w formacie __-___'
+        }
+      })
+      isValid = false;
+    }
+    if(postData.phone.length !== 9 ){
+      setValidateErrors(prevState => {
+        return {
+          ...prevState,
+          phoneNumberError: 'Numer telefonu musi zawierać 9 cyfr.'
+        }
+      })
+      isValid = false;
+    }
+    return isValid;
+  }
+  function clearValidate(){
+    setValidateErrors({
+      streetError: '',
+      cityError: '',
+      postcodeError: '',
+      phoneNumberError: ''
+    })
+  }
+  
+  
+  
   if (formData.step !== 4) return null
   
   return (
@@ -66,6 +145,7 @@ function FormStep4() {
                        type={'text'}
                        className={'formStep4__input'}/>
               </label>
+              <p className={'warning__error'}>{validateErrors.streetError}</p>
               <label className={'formStep4__label'}>
                 Miasto
                 <input name={'city'}
@@ -74,14 +154,16 @@ function FormStep4() {
                        type={'text'}
                        className={'formStep4__input'}/>
               </label>
+              <p className={'warning__error'}>{validateErrors.cityError}</p>
               <label className={'formStep4__label'}>
                 Kod pocztowy
                 <input name={'postcode'}
                        value={postData.postcode}
                        onChange={handlePostChange}
-                       type={'number'}
+                       type={'text'}
                        className={'formStep4__input'}/>
               </label>
+              <p className={'warning__error'}>{validateErrors.postcodeError}</p>
               <label className={'formStep4__label'}>
                 Numer telefonu
                 <input name={'phone'}
@@ -90,6 +172,7 @@ function FormStep4() {
                        type={'number'}
                        className={'formStep4__input'}/>
               </label>
+              <p className={'warning__error'}>{validateErrors.phoneNumberError}</p>
             </div>
             <div className={'formStep4__column'}>
               <h2 className={'formStep4__subtitle'}>Termin odbioru</h2>

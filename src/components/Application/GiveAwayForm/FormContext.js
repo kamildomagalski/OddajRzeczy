@@ -4,7 +4,7 @@ const FormContext = createContext();
 
 function FormProvider(props) {
   const [formData, setFormData]=useState({
-    step: 1,
+    step: 4,
     type: '',
     bags: '',
     localization:'',
