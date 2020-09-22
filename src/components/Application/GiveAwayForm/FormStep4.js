@@ -5,6 +5,14 @@ function FormStep4() {
   const {formData, setStep, handleSetData} = useContext(FormContext)
   const [postData, setPostData] = useState(formData.postData)
   const [courierData, setCourierData] = useState(formData.courierData)
+  const [validateErrors, setValidateErrors] = useState({
+    streetError: '',
+    cityError: '',
+    postcodeError: '',
+    phoneNumberError: '',
+    
+    
+  })
   
   
   const handlePostChange = (event) => {
@@ -28,6 +36,10 @@ function FormStep4() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
+  
+    if(!validate()) return;
+    clearValidate();
+    
     handleSetData({
       postData: {
         ...postData
@@ -41,10 +53,78 @@ function FormStep4() {
   const handlePrevPage = () => {
     setStep(3);
   }
+  // const reg = /^[0-9]*$/i;
+  // const srting = postData.postcode.replace('-', '')
+  // console.log(typeof srting);
+  // const isOk= reg.test('97400')
+  // console.log(isOk);
+  // console.log(postData.postcode.replace('-', ''));
+  
+  //todo sprawdzić działanie regex jak powyżej? dlaczego isOk wywala false?
+  
+  
+  function validate(){
+    let isValid = true;
+    if(postData.street.length < 2){
+      setValidateErrors(prevState => {
+       return {
+         ...prevState,
+         streetError: 'Nazwa ulicy musi zawierać przynajmniej dwa znaki.'
+       }})
+      isValid = false;
+    }
+    if(postData.city.length < 2 ){
+      setValidateErrors(prevState => {
+        return {
+          ...prevState,
+          cityError: 'Nazwa miasta musi zawierać co najmniej dwa znaki.'
+        }
+      })
+      isValid = false;
+    }
+    const reg = /^[0-9]+$/i;
+    if(postData.postcode.length < 6
+    || postData.postcode.charAt(3) !== '-'
+    || !(reg.test(postData.postcode.charAt(1)))
+    || !(reg.test(postData.postcode.charAt(2)))
+    || !(reg.test(postData.postcode.charAt(4)))
+    || !(reg.test(postData.postcode.charAt(5)))
+    || !(reg.test(postData.postcode.charAt(6)))
+    ){
+      setValidateErrors( prevState => {
+        return {
+          ...prevState,
+          postcodeError: 'Kod pocztory musi zawierać cyfry i być w formacie __-___'
+        }
+      })
+      isValid = false;
+    }
+    if(postData.phone.length !== 9 ){
+      setValidateErrors(prevState => {
+        return {
+          ...prevState,
+          phoneNumberError: 'Numer telefonu musi zawierać 9 cyfr.'
+        }
+      })
+      isValid = false;
+    }
+    if(courierData.date)
+    return isValid;
+  }
+  function clearValidate(){
+    setValidateErrors({
+      streetError: '',
+      cityError: '',
+      postcodeError: '',
+      phoneNumberError: ''
+    })
+  }
+  
+  
   if (formData.step !== 4) return null
   
   return (
-    <section className={'formStep'}>
+    <section className={'formStep4'}>
       <div className={'warning'}>
         <div className={'container'}>
           <h2 className={'warning__title'}>Ważne!</h2>
@@ -52,70 +132,74 @@ function FormStep4() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep__counter'}>Krok {formData.step}/4</p>
-        <h1 className={'formStep__title'}>Podaj adres oraz termin odbioru rzecz przez kuriera</h1>
-        <form className={'formStep__form'}>
-          <div className={'formStep__wrapper'}>
-            <div className={'formStep__column'}>
-              <h2 className={'formStep__subtitle'}>Adres odbioru:</h2>
-              <label className={'formStep__label'}>
+        <p className={'formStep4__counter'}>Krok {formData.step}/4</p>
+        <h1 className={'formStep4__title'}>Podaj adres oraz termin odbioru rzecz przez kuriera</h1>
+        <form className={'formStep4__form'}>
+          <div className={'formStep4__wrapper'}>
+            <div className={'formStep4__column'}>
+              <h2 className={'formStep4__subtitle'}>Adres odbioru:</h2>
+              <label className={'formStep4__label'}>
                 Ulica
                 <input name={'street'}
                        value={postData.street}
                        onChange={handlePostChange}
                        type={'text'}
-                       className={'formStep__input'}/>
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label'}>
+              <p className={'warning__error'}>{validateErrors.streetError}</p>
+              <label className={'formStep4__label'}>
                 Miasto
                 <input name={'city'}
                        value={postData.city}
                        onChange={handlePostChange}
                        type={'text'}
-                       className={'formStep__input'}/>
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label'}>
+              <p className={'warning__error'}>{validateErrors.cityError}</p>
+              <label className={'formStep4__label'}>
                 Kod pocztowy
                 <input name={'postcode'}
                        value={postData.postcode}
                        onChange={handlePostChange}
-                       type={'number'}
-                       className={'formStep__input'}/>
+                       type={'text'}
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label'}>
+              <p className={'warning__error'}>{validateErrors.postcodeError}</p>
+              <label className={'formStep4__label'}>
                 Numer telefonu
                 <input name={'phone'}
                        value={postData.phone}
                        onChange={handlePostChange}
                        type={'number'}
-                       className={'formStep__input'}/>
+                       className={'formStep4__input'}/>
               </label>
+              <p className={'warning__error'}>{validateErrors.phoneNumberError}</p>
             </div>
-            <div className={'formStep__column'}>
-              <h2 className={'formStep__subtitle'}>Termin odbioru</h2>
-              <label className={'formStep__label'}>
+            <div className={'formStep4__column'}>
+              <h2 className={'formStep4__subtitle'}>Termin odbioru</h2>
+  
+              <label className={'formStep4__label'}>
                 Data
                 <input name={'date'}
                        value={courierData.date}
                        onChange={handleCourierChange}
-                       type={'number'}
-                       className={'formStep__input'}/>
+                       type={'date'}
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label'}>
+              <label className={'formStep4__label'}>
                 Godzina
                 <input name={'time'}
                        value={courierData.time}
                        onChange={handleCourierChange}
-                       type={'text'}
-                       className={'formStep__input'}/>
+                       type={'time'}
+                       className={'formStep4__input'}/>
               </label>
-              <label className={'formStep__label'}>
-                Uwagi
-                <input name={'note'}
+              <label className={'formStep4__label'}>
+                Uwagi dla  kuriera
+                <textarea name={'note'}
                        value={courierData.note}
                        onChange={handleCourierChange}
-                       type={'text'}
-                       className={'formStep__input'}/>
+                       className={'formStep4__input formStep4__input-textarea'}/>
               </label>
             </div>
           </div>

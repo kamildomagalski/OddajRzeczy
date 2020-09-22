@@ -4,9 +4,8 @@ import {FormContext} from "./FormContext";
 function FormStep1() {
   
   const {formData, handleSetData} = useContext(FormContext)
-  
   const [type, setType] = useState(formData.type)
-  
+  const [validateError, setValidateError] = useState('')
   
   const handleChange = (e) => {
     setType(e.target.value)
@@ -14,17 +13,37 @@ function FormStep1() {
   
   const handleSubmit = (event) => {
     event.preventDefault();
+    
+    if (!validate()) return;
+    clearValidate();
+    
     handleSetData({
       type,
-      step:2
+      step: 2
     })
   }
   
+  function validate() {
+    let isValid = true
+    if (type === '') {
+      setValidateError('Musisz zaznaczyć jedno pole aby przejść dalej!')
+      isValid = false
+    }
+    return isValid;
+  }
+  
+  function validateMsgOff() {
+   return  (type !== '')
+  }
+  
+  function clearValidate(){
+    setValidateError('')
+  }
   
   if (formData.step !== 1) return null
   
   return (
-    <section className={'formStep'}>
+    <section className={'formStep1'}>
       <div className={'warning'}>
         <div className={'container'}>
           <h2 className={'warning__title'}>Ważne!</h2>
@@ -33,49 +52,55 @@ function FormStep1() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep__counter'}>Krok {formData.step}/4</p>
-        <h1 className={'formStep__title'}>Zaznacz co chcesz oddać</h1>
-        <form className={'formStep__form'} onSubmit={handleSubmit}>
-          <label className={'formStep__label'}>
+        <p className={'formStep1__counter'}>Krok {formData.step}/4</p>
+        <h1 className={'formStep1__title'}>Zaznacz co chcesz oddać</h1>
+        <form className={'formStep1__form'} onSubmit={handleSubmit}>
+          <label className={'formStep1__label'}>
             <input type={'radio'} value={'ubrania do ponownego użycia'}
                    checked={type === 'ubrania do ponownego użycia'}
                    onChange={handleChange}
-                   className={'formStep__radio'}/>
-            Ubrania do ponownego użycia
+                   className={'formStep1__radio'}/>
+            <span className={'customRadio'}/>
+            ubrania do ponownego użycia
           </label>
-          <label className={'formStep__label'}>
+          <label className={'formStep1__label'}>
             <input type={'radio'} value={'ubrania do wyrzucenia'}
                    checked={type === 'ubrania do wyrzucenia'}
                    onChange={handleChange}
-                   className={'formStep__radio'}/>
-            Ubrania do wyrzucenia
+                   className={'formStep1__radio'}/>
+            <span className={'customRadio'}/>
+            ubrania do wyrzucenia
           </label>
-          <label className={'formStep__label'}>
+          <label className={'formStep1__label'}>
             <input type={'radio'} value={'zabawki'}
                    checked={type === 'zabawki'}
                    onChange={handleChange}
-                   className={'formStep__radio'}/>
-            Zabawki
+                   className={'formStep1__radio'}/>
+            <span className={'customRadio'}/>
+            zabawki
           </label>
-          <label className={'formStep__label'}>
+          <label className={'formStep1__label'}>
             <input type={'radio'} value={'książki'}
                    checked={type === 'książki'}
                    onChange={handleChange}
-                   className={'formStep__radio'}/>
-            Książki
+                   className={'formStep1__radio'}/>
+            <span className={'customRadio'}/>
+            książki
           </label>
-          <label className={'formStep__label'}>
+          <label className={'formStep1__label'}>
             <input type={'radio'} value={'inne'}
                    checked={type === 'inne'}
                    onChange={handleChange}
-                   className={'formStep__radio'}/>
-            Inne
+                   className={'formStep1__radio'}/>
+            <span className={'customRadio'}/>
+            inne
           </label>
+          <p className={!validateMsgOff() ? 'warning__error' : 'warning__error disabled' }>{validateError}</p>
           <div className={'formStep__buttons'}>
-            <button onClick={handleSubmit} type={"submit"} className={'btn btn-small btn-border formStep__btn'}>Dalej</button>
+            <button onClick={handleSubmit} type={"submit"} className={'btn btn-small btn-border formStep__btn'}>Dalej
+            </button>
           </div>
         </form>
-        
       </div>
     </section>
   );

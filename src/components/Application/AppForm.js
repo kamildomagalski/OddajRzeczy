@@ -5,6 +5,7 @@ import FormStep2 from "./GiveAwayForm/FormStep2";
 import FormStep3 from "./GiveAwayForm/FormStep3";
 import FormStep4 from "./GiveAwayForm/FormStep4";
 import FormSummary from "./GiveAwayForm/FormSummary";
+import FormGreetings from "./GiveAwayForm/FormGreetings";
 
 
 function AppForm() {
@@ -19,6 +20,7 @@ function AppForm() {
         <FormStep3/>
         <FormStep4/>
         <FormSummary/>
+        <FormGreetings/>
       </FormProvider>
       </div>
     </section>

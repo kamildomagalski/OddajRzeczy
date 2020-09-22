@@ -15,10 +15,18 @@
 @import "Homepage/helpSection";
 @import "common/pagination";
 @import "Homepage/contactSection";
+
+//Application
 @import "Application/appHeader";
 @import "Application/login";
 @import "Application/signup";
 @import "Application/logout";
 @import "Application/appForm";
 @import "Application/appMain";
-@import "Application/formStep";
+@import "Application/GiveAwayForm/formStep";
+@import "Application/GiveAwayForm/formStep1";
+@import "Application/GiveAwayForm/formStep2";
+@import "Application/GiveAwayForm/formStep3";
+@import "Application/GiveAwayForm/formStep4";
+@import "Application/GiveAwayForm/formSummary";
+@import "Application/GiveAwayForm/formGreetings";
