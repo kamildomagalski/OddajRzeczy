@@ -7,7 +7,7 @@ import arrowsIcon from '../../../assets/Icon-4.svg'
 function FormSummary() {
   
   const {formData, setStep} = useContext(FormContext)
-  
+  console.log(formData.courierData.date);
   const translateHelpGroup = {
     singleMother: 'samotnym matkom',
     children: 'dzieciom',

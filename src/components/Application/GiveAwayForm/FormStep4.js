@@ -14,6 +14,7 @@ function FormStep4() {
     
   })
   
+  
   const handlePostChange = (event) => {
     const {name, value} = event.target;
     setPostData(prevState => {
@@ -119,7 +120,6 @@ function FormStep4() {
     })
   }
   
-  console.log(courierData.date)
   
   if (formData.step !== 4) return null
   
@@ -177,6 +177,7 @@ function FormStep4() {
             </div>
             <div className={'formStep4__column'}>
               <h2 className={'formStep4__subtitle'}>Termin odbioru</h2>
+  
               <label className={'formStep4__label'}>
                 Data
                 <input name={'date'}
