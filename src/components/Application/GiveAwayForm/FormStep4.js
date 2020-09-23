@@ -1,8 +1,12 @@
 import React, {useState, useContext} from 'react';
 import {FormContext} from "./FormContext";
-import DatePicker from 'react-datepicker'
+import DatePicker, {setDefaultLocale}  from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
+import pl from 'date-fns/locale/pl';
+import {addDays, getDay, setHours, setMinutes}  from 'date-fns'
 
+
+setDefaultLocale(pl)
 
 function FormStep4() {
   const {formData, setStep, handleSetData} = useContext(FormContext)
@@ -14,8 +18,10 @@ function FormStep4() {
     postcodeError: '',
     phoneNumberError: ''
   })
-
   
+  // const [startDate, setStartDate] = useState(new Date());
+  //
+  // console.log(startDate);
   
   const handlePostChange = (event) => {
     const {name, value} = event.target;
@@ -46,7 +52,15 @@ function FormStep4() {
     setCourierData(prevState => {
       return{
         ...prevState,
-        date: date
+      date: date
+      }
+    })
+  }
+  const handleTimeChange= (time)=>{
+    setCourierData(prevState => {
+      return{
+        ...prevState,
+        time: time
       }
     })
   }
@@ -136,7 +150,10 @@ function FormStep4() {
       phoneNumberError: ''
     })
   }
-  
+  const isWeekday = date => {
+    const day = getDay(date);
+    return day !== 0 && day !== 6;
+  };
   
   if (formData.step !== 4) return null
   
@@ -197,20 +214,26 @@ function FormStep4() {
   
               <label className={'formStep4__label'}>
                 Data
-                <DatePicker className={'formStep4__input'} dateFormat="dd-MM-yyyy" selected={courierData.date} onChange={handleDateChange}/>
-                {/*<input name={'date'}*/}
-                {/*       value={courierData.date}*/}
-                {/*       onChange={handleCourierChange}*/}
-                {/*       type={'date'}*/}
-                {/*       className={'formStep4__input'}/>*/}
+                <DatePicker className={'formStep4__input'}
+                            selected={courierData.date}
+                            onChange={handleDateChange}
+                            dateFormat="dd-MM-yyyy"
+                            minDate={addDays(new Date(), 2)}
+                            filterDate = {isWeekday}
+                  />
               </label>
               <label className={'formStep4__label'}>
                 Godzina
-                <input name={'time'}
-                       value={courierData.time}
-                       onChange={handleCourierChange}
-                       type={'time'}
-                       className={'formStep4__input'}/>
+                <DatePicker className={'formStep4__input'}
+                            selected={courierData.time}
+                            onChange={handleTimeChange}
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={60}
+                            minTime={setHours(new Date(),  9)}
+                            maxTime={setHours(new Date(),  18)}
+                            timeCaption="Time"
+                            dateFormat="HH:mm" />
               </label>
               <label className={'formStep4__label'}>
                 Uwagi dla  kuriera

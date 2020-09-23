@@ -78,7 +78,7 @@ function FormSummary() {
               </tr>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Godzina</td>
-                <td className={'formSummary__tableData'}>{formData.courierData.time}</td>
+                <td className={'formSummary__tableData'}>{format(formData.courierData.time, "HH:mm")}</td>
               </tr>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Uwagi dla kuriera</td>
