@@ -60,7 +60,7 @@
     min-width: 300px;
     margin-top: 20px;
     max-width: 335px;
-    @include desktop{
+    @include desktop {
       margin-right: 50px;
       margin-top: 0;
     }
@@ -70,7 +70,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    @include tablet{
+    @include tablet {
       align-items: flex-start;
     }
   }
@@ -97,18 +97,47 @@
     border: 1px solid $color-dark;
     padding-left: 20px;
     margin-left: 20px;
-    &-textarea{
+
+    &-textarea {
       height: 92px;
       flex-shrink: 0;
     }
-    @include desktop{
+
+    @include desktop {
       width: 200px;
     }
   }
 }
-//.react-datepicker{
-//  transform: scale(2.0);
-//}
-//.react-datepicker-popper{
-//  transform: translate3d(449px, 416px, 0px)  !important;
-//}
+
+// overwriten class of react-datepicker
+
+.react-datepicker {
+  font-size: 1.5rem;
+}
+
+.react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
+  font-size: 1.5rem;
+}
+
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+  width: 3rem;
+  line-height: 3rem;
+}
+
+.react-datepicker__day--disabled, .react-datepicker__month-text--disabled, .react-datepicker__quarter-text--disabled, .react-datepicker__year-text--disabled {
+  color: #ccc;
+}
+
+.react-datepicker__navigation {
+  height: 15px;
+  width: 15px;
+  border: 0.9rem solid transparent;
+
+  &--next {
+    border-left-color: #ccc;
+  }
+
+  &--previous {
+    border-right-color: #ccc;
+  }
+}
