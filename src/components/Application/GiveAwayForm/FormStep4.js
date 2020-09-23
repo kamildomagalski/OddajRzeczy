@@ -1,5 +1,8 @@
 import React, {useState, useContext} from 'react';
 import {FormContext} from "./FormContext";
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function FormStep4() {
   const {formData, setStep, handleSetData} = useContext(FormContext)
@@ -9,10 +12,9 @@ function FormStep4() {
     streetError: '',
     cityError: '',
     postcodeError: '',
-    phoneNumberError: '',
-    
-    
+    phoneNumberError: ''
   })
+
   
   
   const handlePostChange = (event) => {
@@ -30,6 +32,21 @@ function FormStep4() {
       return {
         ...prevState,
         [name]: value
+      }
+    })
+  }
+ 
+  // console.log(typeof courierData.date);
+  //
+  // if(courierData.date){
+  //   console.log(format(courierData.date, "dd/MM/yyyy"));
+  // }
+  
+  const handleDateChange= (date)=>{
+    setCourierData(prevState => {
+      return{
+        ...prevState,
+        date: date
       }
     })
   }
@@ -180,11 +197,12 @@ function FormStep4() {
   
               <label className={'formStep4__label'}>
                 Data
-                <input name={'date'}
-                       value={courierData.date}
-                       onChange={handleCourierChange}
-                       type={'date'}
-                       className={'formStep4__input'}/>
+                <DatePicker className={'formStep4__input'} dateFormat="dd-MM-yyyy" selected={courierData.date} onChange={handleDateChange}/>
+                {/*<input name={'date'}*/}
+                {/*       value={courierData.date}*/}
+                {/*       onChange={handleCourierChange}*/}
+                {/*       type={'date'}*/}
+                {/*       className={'formStep4__input'}/>*/}
               </label>
               <label className={'formStep4__label'}>
                 Godzina

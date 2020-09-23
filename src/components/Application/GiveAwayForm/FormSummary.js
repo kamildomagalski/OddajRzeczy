@@ -2,12 +2,12 @@ import React, {useContext} from 'react';
 import {FormContext} from "./FormContext";
 import shirtIcon from '../../../assets/Icon-1.svg'
 import arrowsIcon from '../../../assets/Icon-4.svg'
-
+import format from 'date-fns/format'
 
 function FormSummary() {
   
   const {formData, setStep} = useContext(FormContext)
-  console.log(formData.courierData.date);
+  
   const translateHelpGroup = {
     singleMother: 'samotnym matkom',
     children: 'dzieciom',
@@ -15,7 +15,7 @@ function FormSummary() {
     disabledPeople: 'niepełnosprawnym',
     elderly: 'osobom starszym'
   }
-  
+
   const helpGroups = Object.keys(formData.helpGroups)
     .filter(el => formData.helpGroups[el])
     .map(el => translateHelpGroup[el])
@@ -74,7 +74,7 @@ function FormSummary() {
               <tbody>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Data</td>
-                <td className={'formSummary__tableData'}>{formData.courierData.date}</td>
+                <td className={'formSummary__tableData'}>{format(formData.courierData.date, "dd/MM/yyyy")}</td>
               </tr>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Godzina</td>
