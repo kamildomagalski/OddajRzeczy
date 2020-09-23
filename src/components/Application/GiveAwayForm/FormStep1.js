@@ -3,7 +3,7 @@ import {FormContext} from "./FormContext";
 
 function FormStep1() {
   
-  const {formData, handleSetData} = useContext(FormContext)
+  const {formData, step, handleSetData, handleSetStep} = useContext(FormContext)
   const [type, setType] = useState(formData.type)
   const [validateError, setValidateError] = useState('')
   
@@ -19,8 +19,8 @@ function FormStep1() {
     
     handleSetData({
       type,
-      step: 2
     })
+    handleSetStep(2)
   }
   
   function validate() {
@@ -40,7 +40,7 @@ function FormStep1() {
     setValidateError('')
   }
   
-  if (formData.step !== 1) return null
+  if (step !== 1) return null
   
   return (
     <section className={'formStep1'}>
@@ -52,7 +52,7 @@ function FormStep1() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep1__counter'}>Krok {formData.step}/4</p>
+        <p className={'formStep1__counter'}>Krok {step}/4</p>
         <h1 className={'formStep1__title'}>Zaznacz co chcesz oddać</h1>
         <form className={'formStep1__form'} onSubmit={handleSubmit}>
           <label className={'formStep1__label'}>

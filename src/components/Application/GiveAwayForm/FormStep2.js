@@ -3,7 +3,7 @@ import {FormContext} from "./FormContext";
 
 function FormStep2() {
   const [bags, setBags] = useState('')
-  const {formData, setStep, handleSetData} = useContext(FormContext)
+  const {formData, step, handleSetStep, handleSetData} = useContext(FormContext)
   const [validateError, setValidateError] = useState('')
   
   const handleChange = (e) => {
@@ -18,12 +18,12 @@ function FormStep2() {
     
     handleSetData({
       bags,
-      step: 3
     })
+    handleSetStep(3)
   }
   
   const handlePrevPage = () => {
-    setStep(1)
+    handleSetStep(1)
   }
   
   function validate() {
@@ -43,7 +43,7 @@ function FormStep2() {
     setValidateError('')
   }
   
-  if (formData.step !== 2) return null
+  if (step !== 2) return null
   
   return (
     <section className={'formStep2'}>
@@ -55,7 +55,7 @@ function FormStep2() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep2__counter'}>Krok {formData.step}/4</p>
+        <p className={'formStep2__counter'}>Krok {step}/4</p>
         <h1 className={'formStep2__title'}>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h1>
         <form className={'formStep2__form'} onSubmit={handleSubmit}>
           <label className={'formStep2__label'}>

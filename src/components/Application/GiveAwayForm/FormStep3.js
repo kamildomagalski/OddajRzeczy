@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import {FormContext} from "./FormContext";
 
 function FormStep3() {
-  const {formData, handleSetData, setStep} = useContext(FormContext)
+  const {formData, step, handleSetData, handleSetStep} = useContext(FormContext)
   
   const [localization, setLocalization] = useState(formData.localization)
   const [localizationSpecific, setLocalizationSpecific] = useState(formData.localizationSpecific)
@@ -36,13 +36,13 @@ function FormStep3() {
     handleSetData({
       helpGroups,
       localization,
-      localizationSpecific,
-      step: 4
+      localizationSpecific
     })
+    handleSetStep(4)
   }
   
   const handlePrevPage = () => {
-    setStep(2);
+    handleSetStep(2);
   }
   
   function validate() {
@@ -90,7 +90,7 @@ function FormStep3() {
       helpGroups.singleMother === false)
   }
   
-  if (formData.step !== 3) return null
+  if (step !== 3) return null
   
   return (
     <section className={'formStep3'}>
@@ -102,7 +102,7 @@ function FormStep3() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep3__counter'}>Krok {formData.step}/4</p>
+        <p className={'formStep3__counter'}>Krok {step}/4</p>
         <h1 className={'formStep3__title'}>Lokalizacja:</h1>
         <form className={'formStep3__form'} onSubmit={handleSubmit}>
           <label className={'formStep3__label'}>Lokalizacja:

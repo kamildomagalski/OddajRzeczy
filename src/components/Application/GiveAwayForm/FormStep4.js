@@ -9,7 +9,7 @@ import {addDays, getDay, setHours, setMinutes}  from 'date-fns'
 setDefaultLocale(pl)
 
 function FormStep4() {
-  const {formData, setStep, handleSetData} = useContext(FormContext)
+  const {formData, step, handleSetStep, handleSetData} = useContext(FormContext)
   const [postData, setPostData] = useState(formData.postData)
   const [courierData, setCourierData] = useState(formData.courierData)
   const [validateErrors, setValidateErrors] = useState({
@@ -77,12 +77,12 @@ function FormStep4() {
       },
       courierData: {
         ...courierData
-      },
-      step: 5
+      }
     })
+    handleSetStep(5)
   }
   const handlePrevPage = () => {
-    setStep(3);
+    handleSetStep(3);
   }
   // const reg = /^[0-9]*$/i;
   // const srting = postData.postcode.replace('-', '')
@@ -155,7 +155,7 @@ function FormStep4() {
     return day !== 0 && day !== 6;
   };
   
-  if (formData.step !== 4) return null
+  if (step !== 4) return null
   
   return (
     <section className={'formStep4'}>
@@ -166,7 +166,7 @@ function FormStep4() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep4__counter'}>Krok {formData.step}/4</p>
+        <p className={'formStep4__counter'}>Krok {step}/4</p>
         <h1 className={'formStep4__title'}>Podaj adres oraz termin odbioru rzecz przez kuriera</h1>
         <form className={'formStep4__form'}>
           <div className={'formStep4__wrapper'}>

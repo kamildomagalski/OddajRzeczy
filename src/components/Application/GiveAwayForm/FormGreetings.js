@@ -5,12 +5,12 @@ import {Link} from "react-router-dom";
 
 
 function FormGreetings() {
-  const { formData, setStep } = useContext(FormContext)
+  const {step, handleSetStep } = useContext(FormContext)
   
   const handleNextCollection= () => {
-    setStep(1);
+    handleSetStep(1);
   }
-  if (formData.step !== 6) return null;
+  if (step !== 6) return null;
   return (
     <section className={'formGreetings'}>
       <div className={'container'}>

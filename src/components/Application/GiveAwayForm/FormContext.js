@@ -3,8 +3,8 @@ import React, {useState, createContext} from 'react';
 const FormContext = createContext(null);
 
 function FormProvider(props) {
+  const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
-    step: 1,
     type: '',
     bags: '',
     localization: '',
@@ -36,45 +36,41 @@ function FormProvider(props) {
     }))
   }
   
-  const setStep = (num) => {
-    setFormData(prevState => ({
-      ...prevState,
-      step: num
-    }))
+  const handleSetStep = (num) => {
+    setStep(num)
   }
+  const clearFormState = () => {
   
+  }
   const clearFormData = () => {
-    setFormData(prevState => {
-      return {
-        step: 5,
-        type: '',
-        bags: '',
-        localization: '',
-        localizationSpecific: '',
-        helpGroups: {
-          children: false,
-          singleMother: false,
-          homeless: false,
-          disabledPeople: false,
-          elderly: false
-        },
-        postData: {
-          street: '',
-          city: '',
-          postcode: ' ',
-          phone: ''
-        },
-        courierData: {
-          date: '',
-          time: '',
-          note: ''
-        }
+    setFormData({
+      type: '',
+      bags: '',
+      localization: '',
+      localizationSpecific: '',
+      helpGroups: {
+        children: false,
+        singleMother: false,
+        homeless: false,
+        disabledPeople: false,
+        elderly: false
+      },
+      postData: {
+        street: '',
+        city: '',
+        postcode: ' ',
+        phone: ''
+      },
+      courierData: {
+        date: '',
+        time: '',
+        note: ''
       }
     })
   }
   
   return (
-    <FormContext.Provider value={{formData, setFormData, handleSetData, setStep, clearFormData}}>
+    <FormContext.Provider value={{formData, step, handleSetData, handleSetStep, clearFormData}}>
       {props.children}
     </FormContext.Provider>
   );
