@@ -1,12 +1,14 @@
-import React, {useContext} from 'react';
-import {FormContext} from "./FormContext";
+import React, { useContext } from 'react';
+import { FormContext } from "./FormContext";
 import shirtIcon from '../../../assets/Icon-1.svg'
 import arrowsIcon from '../../../assets/Icon-4.svg'
 import format from 'date-fns/format'
+import { withFirebase } from "../../Firebase";
+// import firebase from "firebase";
 
-function FormSummary() {
+function FormSummary( {firebase}) {
   
-  const {formData, setStep} = useContext(FormContext)
+  const {formData, setStep, clearFormData} = useContext(FormContext)
   
   const translateHelpGroup = {
     singleMother: 'samotnym matkom',
@@ -24,9 +26,14 @@ function FormSummary() {
   const handlePrevPage = () => {
     setStep(4);
   }
-  
+  const userId= firebase.auth.currentUser.uid;
+
+
   const handleConfirm = () => {
-    setStep(6)
+    firebase.user(userId).child('userDonations').push().update(formData)
+      .then(clearFormData)
+      .then(setStep(6))
+    
   }
   if (formData.step !== 5) return null
   
@@ -74,11 +81,11 @@ function FormSummary() {
               <tbody>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Data</td>
-                <td className={'formSummary__tableData'}>{format(formData.courierData.date, "dd/MM/yyyy")}</td>
+                {/*<td className={'formSummary__tableData'}>{format(formData.courierData.date, "dd/MM/yyyy")}</td>*/}
               </tr>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Godzina</td>
-                <td className={'formSummary__tableData'}>{format(formData.courierData.time, "HH:mm")}</td>
+                {/*<td className={'formSummary__tableData'}>{format(formData.courierData.time, "HH:mm")}</td>*/}
               </tr>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Uwagi dla kuriera</td>
@@ -101,4 +108,4 @@ function FormSummary() {
   );
 }
 
-export default FormSummary;
+export default withFirebase(FormSummary);
