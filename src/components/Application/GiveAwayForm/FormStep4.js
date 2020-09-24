@@ -205,7 +205,9 @@ function FormStep4() {
                        type={'text'}
                        className={'formStep4__input'}/>
               </label>
-              <p className={'warning__error'}>{validateErrors.streetError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={'warning__error'}>{validateErrors.streetError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Miasto
                 <input name={'city'}
@@ -214,7 +216,9 @@ function FormStep4() {
                        type={'text'}
                        className={'formStep4__input'}/>
               </label>
-              <p className={'warning__error'}>{validateErrors.cityError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={'warning__error'}>{validateErrors.cityError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Kod pocztowy
                 <input name={'postcode'}
@@ -223,7 +227,9 @@ function FormStep4() {
                        type={'text'}
                        className={'formStep4__input'}/>
               </label>
-              <p className={'warning__error'}>{validateErrors.postcodeError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={'warning__error'}>{validateErrors.postcodeError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Numer telefonu
                 <input name={'phone'}
@@ -232,7 +238,9 @@ function FormStep4() {
                        type={'number'}
                        className={'formStep4__input'}/>
               </label>
-              <p className={'warning__error'}>{validateErrors.phoneNumberError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={'warning__error'}>{validateErrors.phoneNumberError}</p>
+              </div>
             </div>
             <div className={'formStep4__column'}>
               <h2 className={'formStep4__subtitle'}>Termin odbioru</h2>
@@ -247,7 +255,9 @@ function FormStep4() {
                             filterDate = {isWeekday}
                   />
               </label>
-              <p className={'warning__error'}>{validateErrors.dateError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={'warning__error'}>{validateErrors.dateError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Godzina
                 <DatePicker className={'formStep4__input'}
@@ -261,7 +271,9 @@ function FormStep4() {
                             timeCaption="Time"
                             dateFormat="HH:mm" />
               </label>
-              <p className={'warning__error'}>{validateErrors.timeError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={'warning__error'}>{validateErrors.timeError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Uwagi dla  kuriera
                 <textarea name={'note'}
