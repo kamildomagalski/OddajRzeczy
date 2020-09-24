@@ -98,6 +98,13 @@ function FormStep4() {
   
   //todo sprawdzić działanie regex jak powyżej? dlaczego isOk wywala false?
   
+  console.log(postData.postcode.charAt(0));
+  console.log(postData.postcode.charAt(1));
+  console.log(postData.postcode.charAt(2));
+  console.log(postData.postcode.charAt(3));
+  console.log(postData.postcode.charAt(4));
+  console.log(postData.postcode.charAt(5));
+  console.log(postData.postcode.length);
   
   function validate(){
     let isValid = true;
@@ -120,12 +127,12 @@ function FormStep4() {
     }
     const reg = /^[0-9]+$/i;
     if(postData.postcode.length < 6
-    || postData.postcode.charAt(3) !== '-'
+    || postData.postcode.charAt(2) !== '-'
+    || !(reg.test(postData.postcode.charAt(0)))
     || !(reg.test(postData.postcode.charAt(1)))
-    || !(reg.test(postData.postcode.charAt(2)))
+    || !(reg.test(postData.postcode.charAt(3)))
     || !(reg.test(postData.postcode.charAt(4)))
     || !(reg.test(postData.postcode.charAt(5)))
-    || !(reg.test(postData.postcode.charAt(6)))
     ){
       setValidateErrors( prevState => {
         return {

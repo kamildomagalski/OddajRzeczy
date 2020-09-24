@@ -4,7 +4,7 @@ const FormContext = createContext(null);
 
 function FormProvider(props) {
   const [clear, setClear] = useState(0)
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(4)
   const [formData, setFormData] = useState({
     type: '',
     bags: '',
@@ -20,7 +20,7 @@ function FormProvider(props) {
     postData: {
       street: '',
       city: '',
-      postcode: ' ',
+      postcode: '',
       phone: ''
     },
     courierData: {
