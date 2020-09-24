@@ -1,11 +1,16 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {FormContext} from "./FormContext";
 
-function FormStep1() {
+function FormStep1({value}) {
   
-  const {formData, step, handleSetData, handleSetStep} = useContext(FormContext)
+  const {formData, step, handleSetData, handleSetStep, clear} = useContext(FormContext)
   const [type, setType] = useState(formData.type)
   const [validateError, setValidateError] = useState('')
+
+
+  useEffect(()=>{
+    setType(formData.type)
+  },[clear])
   
   const handleChange = (e) => {
     setType(e.target.value)

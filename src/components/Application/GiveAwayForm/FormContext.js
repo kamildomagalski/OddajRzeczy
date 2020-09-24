@@ -3,6 +3,7 @@ import React, {useState, createContext} from 'react';
 const FormContext = createContext(null);
 
 function FormProvider(props) {
+  const [clear, setClear]= useState(0)
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     type: '',
@@ -39,9 +40,9 @@ function FormProvider(props) {
   const handleSetStep = (num) => {
     setStep(num)
   }
-  const clearFormState = () => {
-  
-  }
+const clearData=()=>{
+    setClear(value=>value + 1)
+}
   const clearFormData = () => {
     setFormData({
       type: '',
@@ -70,7 +71,7 @@ function FormProvider(props) {
   }
   
   return (
-    <FormContext.Provider value={{formData, step, handleSetData, handleSetStep, clearFormData}}>
+    <FormContext.Provider value={{formData, step, clear, handleSetData, handleSetStep, clearFormData, clearData}}>
       {props.children}
     </FormContext.Provider>
   );

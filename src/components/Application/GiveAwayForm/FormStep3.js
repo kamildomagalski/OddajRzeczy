@@ -1,8 +1,8 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {FormContext} from "./FormContext";
 
 function FormStep3() {
-  const {formData, step, handleSetData, handleSetStep} = useContext(FormContext)
+  const {formData, step, handleSetData, handleSetStep, clear} = useContext(FormContext)
   
   const [localization, setLocalization] = useState(formData.localization)
   const [localizationSpecific, setLocalizationSpecific] = useState(formData.localizationSpecific)
@@ -11,6 +11,12 @@ function FormStep3() {
     localError: '',
     helpGroupError: ''
   })
+
+  useEffect(()=>{
+    setLocalization(formData.localization)
+    setLocalizationSpecific(formData.localizationSpecific)
+    setHelpGroups(formData.helpGroups)
+  },[clear])
   
   const handleLocalChange = (e) => {
     setLocalization(e.target.value)

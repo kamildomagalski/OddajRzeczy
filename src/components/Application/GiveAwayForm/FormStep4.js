@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {FormContext} from "./FormContext";
 import DatePicker, {setDefaultLocale}  from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,7 +9,7 @@ import {addDays, getDay, setHours, setMinutes}  from 'date-fns'
 setDefaultLocale(pl)
 
 function FormStep4() {
-  const {formData, step, handleSetStep, handleSetData} = useContext(FormContext)
+  const {formData, step, handleSetStep, handleSetData, clear} = useContext(FormContext)
   const [postData, setPostData] = useState(formData.postData)
   const [courierData, setCourierData] = useState(formData.courierData)
   const [validateErrors, setValidateErrors] = useState({
@@ -18,6 +18,11 @@ function FormStep4() {
     postcodeError: '',
     phoneNumberError: ''
   })
+  
+  useEffect(()=>{
+    setPostData(formData.postData)
+    setCourierData(formData.courierData)
+  },[clear])
   
   // const [startDate, setStartDate] = useState(new Date());
   //

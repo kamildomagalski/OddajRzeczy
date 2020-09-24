@@ -6,9 +6,9 @@ import format from 'date-fns/format'
 import { withFirebase } from "../../Firebase";
 
 
-function FormSummary( {firebase}) {
+function FormSummary( {firebase, forceUpdate}) {
   
-  const {formData, step, handleSetStep, clearFormData} = useContext(FormContext)
+  const {formData, step, handleSetStep, clearFormData,clearData} = useContext(FormContext)
   
   const translateHelpGroup = {
     singleMother: 'samotnym matkom',
@@ -26,15 +26,20 @@ function FormSummary( {firebase}) {
   const handlePrevPage = () => {
     handleSetStep(4);
   }
+  const handleForceUpdate= () => clearData;
+  
   const userId= firebase.auth.currentUser.uid;
 
 
   const handleConfirm = () => {
     firebase.user(userId).child('userDonations').push().update(formData)
       .then(clearFormData)
+      .then(handleForceUpdate())
       .then(handleSetStep(6))
-    
+
   }
+  
+  
   if (step !== 5) return null
   
   return (

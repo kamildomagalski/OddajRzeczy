@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FormProvider} from "./GiveAwayForm/FormContext";
 import FormStep1 from "./GiveAwayForm/FormStep1";
 import FormStep2 from "./GiveAwayForm/FormStep2";
@@ -9,8 +9,6 @@ import FormGreetings from "./GiveAwayForm/FormGreetings";
 
 
 function AppForm() {
-  
-  
   return (
     <section className={'appForm'}>
       <div className={'backgroundFilter'}>
