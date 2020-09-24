@@ -6,9 +6,9 @@ import format from 'date-fns/format'
 import { withFirebase } from "../../Firebase";
 
 
-function FormSummary( {firebase, forceUpdate}) {
+function FormSummary( { firebase }) {
   
-  const {formData, step, handleSetStep, clearFormData,clearData} = useContext(FormContext)
+  const { formData, step, handleSetStep, clearFormData, clearData } = useContext(FormContext)
   
   const translateHelpGroup = {
     singleMother: 'samotnym matkom',
@@ -29,8 +29,6 @@ function FormSummary( {firebase, forceUpdate}) {
   const handleForceUpdate= () => clearData;
   
   const userId= firebase.auth.currentUser.uid;
-
-
   const handleConfirm = () => {
     firebase.user(userId).child('userDonations').push().update(formData)
       .then(clearFormData)
@@ -87,18 +85,18 @@ function FormSummary( {firebase, forceUpdate}) {
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Data</td>
                 <td className={'formSummary__tableData'}>
-                  {formData.courierData.date ? format(formData.courierData.date, "dd/MM/yyyy"): null}
+                  {format(formData.courierData.date, "dd/MM/yyyy")}
                 </td>
               </tr>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Godzina</td>
                 <td className={'formSummary__tableData'}>
-                  {formData.courierData.time ? format(formData.courierData.time, "HH:mm") : null}
+                  {format(formData.courierData.time, "HH:mm")}
                 </td>
               </tr>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Uwagi dla kuriera</td>
-                <td className={'formSummary__tableData'}>{formData.courierData.note ? formData.courierData.note : 'brak uwag'}</td>
+                <td className={'formSummary__tableData'}>{formData.courierData.note !== '' ? formData.courierData.note : 'brak uwag'}</td>
               </tr>
               </tbody>
             </table>
