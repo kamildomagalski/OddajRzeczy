@@ -16,7 +16,9 @@ function FormStep4() {
     streetError: '',
     cityError: '',
     postcodeError: '',
-    phoneNumberError: ''
+    phoneNumberError: '',
+    dateError:'',
+    timeError:''
   })
   
   useEffect(()=>{
@@ -98,14 +100,6 @@ function FormStep4() {
   
   //todo sprawdzić działanie regex jak powyżej? dlaczego isOk wywala false?
   
-  console.log(postData.postcode.charAt(0));
-  console.log(postData.postcode.charAt(1));
-  console.log(postData.postcode.charAt(2));
-  console.log(postData.postcode.charAt(3));
-  console.log(postData.postcode.charAt(4));
-  console.log(postData.postcode.charAt(5));
-  console.log(postData.postcode.length);
-  
   function validate(){
     let isValid = true;
     if(postData.street.length < 2){
@@ -151,7 +145,24 @@ function FormStep4() {
       })
       isValid = false;
     }
-    if(courierData.date)
+    if(courierData.date === ''){
+      setValidateErrors( prevState => {
+        return {
+          ...prevState,
+          dateError: 'Wybierz datę odbioru rzeczy przez kuriera.'
+        }
+      })
+      isValid= false
+    }
+    if(courierData.time === ''){
+      setValidateErrors( prevState => {
+        return {
+          ...prevState,
+          timeError: 'Wybierz godzinę odbioru rzeczy przez kuriera.'
+        }
+      })
+      isValid= false
+    }
     return isValid;
   }
   function clearValidate(){
@@ -159,7 +170,9 @@ function FormStep4() {
       streetError: '',
       cityError: '',
       postcodeError: '',
-      phoneNumberError: ''
+      phoneNumberError: '',
+      dateError:'',
+      timeError:''
     })
   }
   const isWeekday = date => {
@@ -234,6 +247,7 @@ function FormStep4() {
                             filterDate = {isWeekday}
                   />
               </label>
+              <p className={'warning__error'}>{validateErrors.dateError}</p>
               <label className={'formStep4__label'}>
                 Godzina
                 <DatePicker className={'formStep4__input'}
@@ -247,6 +261,7 @@ function FormStep4() {
                             timeCaption="Time"
                             dateFormat="HH:mm" />
               </label>
+              <p className={'warning__error'}>{validateErrors.timeError}</p>
               <label className={'formStep4__label'}>
                 Uwagi dla  kuriera
                 <textarea name={'note'}
