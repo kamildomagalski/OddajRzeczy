@@ -12,10 +12,10 @@
 
 ## General info
 
-This is a PortfolioLab project of Coders Lab's bootcamp course called "REACT Web Developer". 
-The idea was to follow guidelines from imaginary investor, and fulfill all sprint backlog tasks in a given time.
-The idea, graphic design and assets was given by CodersLab.
-All the logic as well as tech stack, RWD layout is my own idea. 
+This is a PortfolioLab project of Coders Lab's bootcamp course called "REACT Web Developer". <br>
+The idea was to follow guidelines from imaginary investor, and fulfill all sprint backlog tasks in a given time. <br>
+The idea, graphic design and assets was given by CodersLab. <br>
+All the logic as well as tech stack, RWD layout is my own idea. <br>
 I have also expand functionality by adding some extra validation conditions, small animations and minor changes in website appearance.
 <hr>
 
@@ -46,10 +46,11 @@ You will also see any lint errors in the console.
 
 ## How to use it?
 1. On the Landingpage we can experience some basic information about the idea. 
-2. At the bottom of the page we can see a contact form with propervalidation. I used CL API to send the message and simulate real-life connection fith serwer.
-3. A newcomer can sign-in via sign-up section. It uses Firebase Authentication based on email adress. It contains buid-in validation as well as my additional that prevent from sending request untill proper data are put in. 
-4. Users with accounts can log-in and enter authorization route. Both build-in and my own validation is used here as well. 
-5. After log-i user can fill 5 step form that uses React Context to store data locally. Each step is validated before entering next step. 
+2. At the bottom of the page we can see a contact form with proper validation. I used CodersLab API to send the message and simulate real-life connection with serwer.
+3. A newcomer can sign up in sign-up section. <b>Email adress can be made-up.<b> It uses Firebase Authentication based on email adress.<br>
+It contains buid-in as well as my own-ruled validation that prevent from sending request untill proper data are fill in. 
+4. Users with accounts can log in and enter authorization route. Both build-in and my own-ruled validation is used here as well. 
+5. After log in user can fill 5 step form that uses React Context to store data locally. Each step is validated before entering next step. 
 6. After summary, all data is stored at user account using Firebase Realtime Database.
 <hr>
 
@@ -63,6 +64,7 @@ To-do list:
 * Password change and pasword reminder
 * Past donations preview
 * Admin panel
+* Multi language switch usin Redux
 <hr>
 
 ## Status
