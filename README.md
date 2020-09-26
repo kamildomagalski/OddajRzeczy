@@ -1,5 +1,5 @@
 # OddajRzeczy
-> If you have some extra unnecesary things you, can help some people in need like single mothers or homeless just in a few clicks using this app. 
+> If you have some unnecesary things you, can help some people in need like single mothers or homeless just in a few clicks using this app.
 
 ## Table of contents
 * [General info](#general-info)
@@ -7,7 +7,6 @@
 * [Setup](#setup)
 * [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
 * [Contact](#contact)
 <hr>
 
@@ -45,7 +44,7 @@ The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 <hr>
 
-##How to use it?
+## How to use it?
 1. On the Landingpage we can experience some basic information about the idea. 
 2. At the bottom of the page we can see a contact form with propervalidation. I used CL API to send the message and simulate real-life connection fith serwer.
 3. A newcomer can sign-in via sign-up section. It uses Firebase Authentication based on email adress. It contains buid-in validation as well as my additional that prevent from sending request untill proper data are put in. 
