@@ -47,7 +47,7 @@ You will also see any lint errors in the console.
 ## How to use it?
 1. On the Landingpage we can experience some basic information about the idea. 
 2. At the bottom of the page we can see a contact form with proper validation. I used CodersLab API to send the message and simulate real-life connection with serwer.
-3. A newcomer can sign up in sign-up section. <b>Email adress can be made-up.<b> It uses Firebase Authentication based on email adress.<br>
+3. A newcomer can sign up in sign-up section. <b>Email adress can be made-up.</b> It uses Firebase Authentication based on email adress.<br>
 It contains buid-in as well as my own-ruled validation that prevent from sending request untill proper data are fill in. 
 4. Users with accounts can log in and enter authorization route. Both build-in and my own-ruled validation is used here as well. 
 5. After log in user can fill 5 step form that uses React Context to store data locally. Each step is validated before entering next step. 
