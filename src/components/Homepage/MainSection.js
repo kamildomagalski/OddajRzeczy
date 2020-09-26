@@ -42,7 +42,7 @@ function MainSection({firebase}) {
                                                         to={'steps'}
                                                         spy={true}
                                                         smooth={true}
-                                                        duration={500}>co chodzi?</LinkScroll></li>
+                                                        duration={500}>O co chodzi?</LinkScroll></li>
             <li className={'menu__element'}><LinkScroll className={'menu__link'} onClick={handleMenuClose}
                                                         to={'about'}
                                                         spy={true}
