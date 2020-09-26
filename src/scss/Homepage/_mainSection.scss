@@ -96,6 +96,9 @@
       padding: 9px 20px;
       width: 100vw;
       text-align: center;
+      &:visited{
+        color: inherit;
+      }
       @include desktop {
         width: unset;
         text-align: start;

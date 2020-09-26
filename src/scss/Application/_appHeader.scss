@@ -17,7 +17,15 @@
     margin: 37px 0 17px;
     @include desktop {
       display: flex;
+      align-items: center;
     }
+  }
+
+  &__userEmail {
+    font-family: $font-base;
+    color: $color-dark;
+    font-size: 1.3rem;
+    margin-right: 20px;
   }
 
   .menu {
@@ -70,6 +78,9 @@
       padding: 9px 20px;
       width: 100vw;
       text-align: center;
+      &:visited{
+        color: inherit;
+      }
       @include desktop {
         width: unset;
         text-align: start;
