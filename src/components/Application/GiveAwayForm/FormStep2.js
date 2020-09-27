@@ -32,7 +32,7 @@ function FormStep2() {
   
   function validate() {
     let isValid = true
-    if (bags === '') {
+    if (bags === '' || bags === 'wybierz') {
       setValidateError('Wybierz ilość worków aby przejść dalej')
       isValid = false
     }
@@ -40,7 +40,8 @@ function FormStep2() {
   }
   
   function validateMsgOff() {
-    return  (bags !== '')
+    return  (bags !== ''
+    && bags !== 'wybierz')
   }
   
   function clearValidate(){
@@ -65,7 +66,7 @@ function FormStep2() {
           <label className={'formStep2__label'}>
             Liczba 60l worków:
             <select value={bags} onChange={handleChange} className={'formStep2__select'}>
-              {/*<option>--wybierz--</option>*/}
+              <option value={'wybierz'}>wybierz</option>
               <option value={1} className={'formStep2__option'}>1</option>
               <option value={2} className={'formStep2__option'}>2</option>
               <option value={3} className={'formStep2__option'}>3</option>
