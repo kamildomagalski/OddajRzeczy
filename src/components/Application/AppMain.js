@@ -10,7 +10,7 @@ function AppMain() {
       <div className={'backgroundFilter'}>
         <AppHeader/>
         <div className={'appMain__content'}>
-          <h2 className={'appMain__title'}>Oddaj rreczy, których już nie chcesz</h2>
+          <h2 className={'appMain__title'}>Oddaj rzeczy, których już nie chcesz</h2>
           <h2 className={'appMain__title'}>POTRZEBUJĄCYM</h2>
           <img className={'decoration'} src={decoration} alt={'decoration'}/>
           <h3 className={'appMain__subtitle'}>Wystarczą 4 proste kroki:</h3>
