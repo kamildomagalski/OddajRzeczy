@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {withFirebase} from "../Firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { withFirebase } from "../Firebase";
 import LogButtons from "../logic_components/LogButtons";
-import {Link as LinkScroll} from "react-scroll";
+import { Link as LinkScroll } from "react-scroll";
+import LogButtonsMobile from "../logic_components/LogButtonsMobile";
 
 
 
@@ -46,6 +47,7 @@ function AppHeader({ firebase }) {
                                                     spy={true}
                                                     smooth={true}
                                                     duration={500}>Kontakt</LinkScroll></li>
+        <LogButtonsMobile userEmail={userEmail} />
       </ul>
     </header>
   );

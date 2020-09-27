@@ -21,6 +21,55 @@
     }
   }
 
+  .logInMobile {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0;
+    @include desktop {
+      display: none;
+    }
+
+    .main__userEmail {
+      font-size: 2.0rem;
+      color: $color-yellow;
+    }
+
+    .buttonsMobile__wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .btn-mobile {
+      padding: 20px 10px;
+      width: 140px;
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+
+      &:hover {
+        border: 1px solid $color-yellow;
+      }
+
+      &:active {
+        background-color: lightgoldenrodyellow;
+      }
+
+      &:visited {
+        border: inherit;
+      }
+
+    }
+
+    .main__userEmail {
+      margin: 0;
+      text-align: center;
+
+    }
+  }
+
   &__userEmail {
     font-family: $font-base;
     color: $color-dark;
@@ -78,9 +127,11 @@
       padding: 9px 20px;
       width: 100vw;
       text-align: center;
-      &:visited{
+
+      &:visited {
         color: inherit;
       }
+
       @include desktop {
         width: unset;
         text-align: start;

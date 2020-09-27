@@ -3,7 +3,7 @@ import {FormContext} from "./FormContext";
 import DatePicker, {setDefaultLocale}  from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import pl from 'date-fns/locale/pl';
-import {addDays, getDay, setHours, setMinutes}  from 'date-fns'
+import {addDays, getDay, setHours}  from 'date-fns'
 
 
 setDefaultLocale(pl)

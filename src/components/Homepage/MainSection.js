@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {withFirebase} from "../Firebase";
-import {Link} from "react-router-dom";
-import {Link as LinkScroll, animateScroll as scroll} from 'react-scroll';
+import React, { useEffect, useState } from 'react';
+import { withFirebase } from "../Firebase";
+import { Link } from "react-router-dom";
+import { Link as LinkScroll, animateScroll as scroll } from 'react-scroll';
 
 import decoration from '../../assets/Decoration.svg';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LogButtons from "../logic_components/LogButtons";
+import LogButtonsMobile from "../logic_components/LogButtonsMobile";
 
-function MainSection({firebase}) {
+function MainSection({ firebase }) {
   const [menuClick, setMenuClick] = useState(false)
   const [userEmail, setUserEmail] = useState(null)
   const [isLoaded, setLoaded] = useState(false)
@@ -58,6 +59,7 @@ function MainSection({firebase}) {
                                                         spy={true}
                                                         smooth={true}
                                                         duration={500}>Kontakt</LinkScroll></li>
+            <LogButtonsMobile userEmail={userEmail} />
           </ul>
         </header>
         <div className={'content'}>
