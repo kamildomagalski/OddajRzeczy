@@ -3,8 +3,7 @@
   flex-direction: column;
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  //tutaj zmieniony padding
+  min-height: calc(100vh - 120px);
   padding: 120px 0 100px;
   @include tablet{
     padding: 120px 0 0;
