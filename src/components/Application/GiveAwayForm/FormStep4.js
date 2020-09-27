@@ -175,6 +175,36 @@ function FormStep4() {
       timeError:''
     })
   }
+  
+  function validateStreetMsgOff() {
+    return (postData.street.length >= 2)
+  }
+  function validateCityMsgOff() {
+    return (postData.city.length >= 2)
+  }
+  
+  function validatePostcodeMsgOff() {
+    const reg = /^[0-9]+$/i;
+    return (postData.postcode.length < 6
+      || postData.postcode.charAt(2) !== '-'
+      || !(reg.test(postData.postcode.charAt(0)))
+      || !(reg.test(postData.postcode.charAt(1)))
+      || !(reg.test(postData.postcode.charAt(3)))
+      || !(reg.test(postData.postcode.charAt(4)))
+      || !(reg.test(postData.postcode.charAt(5)))
+    )
+  }
+  function validatePhoneMsgOff(){
+    return (postData.phone.length !== 9)
+  }
+  function validateDateMsgOff(){
+    return(courierData.date === '')
+  }
+  function validateTimeMsgOff(){
+    return(courierData.time === '')
+  }
+  
+  
   const isWeekday = date => {
     const day = getDay(date);
     return day !== 0 && day !== 6;
@@ -206,7 +236,7 @@ function FormStep4() {
                        className={'formStep4__input'}/>
               </label>
               <div className={'warning__errorBox'}>
-                <p className={'warning__error'}>{validateErrors.streetError}</p>
+                <p className={!validateStreetMsgOff() ? 'warning__error': 'warning__error disabled'}>{validateErrors.streetError}</p>
               </div>
               <label className={'formStep4__label'}>
                 Miasto
@@ -217,7 +247,7 @@ function FormStep4() {
                        className={'formStep4__input'}/>
               </label>
               <div className={'warning__errorBox'}>
-                <p className={'warning__error'}>{validateErrors.cityError}</p>
+                <p className={!validateCityMsgOff() ? 'warning__error': 'warning__error disabled'}>{validateErrors.cityError}</p>
               </div>
               <label className={'formStep4__label'}>
                 Kod pocztowy
@@ -228,7 +258,7 @@ function FormStep4() {
                        className={'formStep4__input'}/>
               </label>
               <div className={'warning__errorBox'}>
-                <p className={'warning__error'}>{validateErrors.postcodeError}</p>
+                <p className={validatePostcodeMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.postcodeError}</p>
               </div>
               <label className={'formStep4__label'}>
                 Numer telefonu
@@ -239,7 +269,7 @@ function FormStep4() {
                        className={'formStep4__input'}/>
               </label>
               <div className={'warning__errorBox'}>
-                <p className={'warning__error'}>{validateErrors.phoneNumberError}</p>
+                <p className={validatePhoneMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.phoneNumberError}</p>
               </div>
             </div>
             <div className={'formStep4__column'}>
@@ -256,7 +286,7 @@ function FormStep4() {
                   />
               </label>
               <div className={'warning__errorBox'}>
-                <p className={'warning__error'}>{validateErrors.dateError}</p>
+                <p className={validateDateMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.dateError}</p>
               </div>
               <label className={'formStep4__label'}>
                 Godzina
@@ -272,7 +302,7 @@ function FormStep4() {
                             dateFormat="HH:mm" />
               </label>
               <div className={'warning__errorBox'}>
-                <p className={'warning__error'}>{validateErrors.timeError}</p>
+                <p className={validateTimeMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.timeError}</p>
               </div>
               <label className={'formStep4__label'}>
                 Uwagi dla  kuriera
