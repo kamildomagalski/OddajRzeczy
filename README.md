@@ -1,6 +1,8 @@
 # OddajRzeczy
 > If you have some unnecesary things you, can help some people in need like single mothers or homeless just in a few clicks using this app.
 
+> Try it out! [Demo](https://oddajrzeczy-66300.web.app/)
+
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
