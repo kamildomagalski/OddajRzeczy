@@ -1,23 +1,30 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {FormContext} from "./FormContext";
 import DatePicker, {setDefaultLocale}  from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import pl from 'date-fns/locale/pl';
-import {addDays, getDay, setHours, setMinutes}  from 'date-fns'
+import {addDays, getDay, setHours}  from 'date-fns'
 
 
 setDefaultLocale(pl)
 
 function FormStep4() {
-  const {formData, setStep, handleSetData} = useContext(FormContext)
+  const {formData, step, handleSetStep, handleSetData, clear} = useContext(FormContext)
   const [postData, setPostData] = useState(formData.postData)
   const [courierData, setCourierData] = useState(formData.courierData)
   const [validateErrors, setValidateErrors] = useState({
     streetError: '',
     cityError: '',
     postcodeError: '',
-    phoneNumberError: ''
+    phoneNumberError: '',
+    dateError:'',
+    timeError:''
   })
+  
+  useEffect(()=>{
+    setPostData(formData.postData)
+    setCourierData(formData.courierData)
+  },[clear])
   
   // const [startDate, setStartDate] = useState(new Date());
   //
@@ -77,12 +84,12 @@ function FormStep4() {
       },
       courierData: {
         ...courierData
-      },
-      step: 5
+      }
     })
+    handleSetStep(5)
   }
   const handlePrevPage = () => {
-    setStep(3);
+    handleSetStep(3);
   }
   // const reg = /^[0-9]*$/i;
   // const srting = postData.postcode.replace('-', '')
@@ -92,7 +99,6 @@ function FormStep4() {
   // console.log(postData.postcode.replace('-', ''));
   
   //todo sprawdzić działanie regex jak powyżej? dlaczego isOk wywala false?
-  
   
   function validate(){
     let isValid = true;
@@ -115,12 +121,12 @@ function FormStep4() {
     }
     const reg = /^[0-9]+$/i;
     if(postData.postcode.length < 6
-    || postData.postcode.charAt(3) !== '-'
+    || postData.postcode.charAt(2) !== '-'
+    || !(reg.test(postData.postcode.charAt(0)))
     || !(reg.test(postData.postcode.charAt(1)))
-    || !(reg.test(postData.postcode.charAt(2)))
+    || !(reg.test(postData.postcode.charAt(3)))
     || !(reg.test(postData.postcode.charAt(4)))
     || !(reg.test(postData.postcode.charAt(5)))
-    || !(reg.test(postData.postcode.charAt(6)))
     ){
       setValidateErrors( prevState => {
         return {
@@ -139,7 +145,24 @@ function FormStep4() {
       })
       isValid = false;
     }
-    if(courierData.date)
+    if(courierData.date === ''){
+      setValidateErrors( prevState => {
+        return {
+          ...prevState,
+          dateError: 'Wybierz datę odbioru rzeczy przez kuriera.'
+        }
+      })
+      isValid= false
+    }
+    if(courierData.time === ''){
+      setValidateErrors( prevState => {
+        return {
+          ...prevState,
+          timeError: 'Wybierz godzinę odbioru rzeczy przez kuriera.'
+        }
+      })
+      isValid= false
+    }
     return isValid;
   }
   function clearValidate(){
@@ -147,15 +170,47 @@ function FormStep4() {
       streetError: '',
       cityError: '',
       postcodeError: '',
-      phoneNumberError: ''
+      phoneNumberError: '',
+      dateError:'',
+      timeError:''
     })
   }
+  
+  function validateStreetMsgOff() {
+    return (postData.street.length >= 2)
+  }
+  function validateCityMsgOff() {
+    return (postData.city.length >= 2)
+  }
+  
+  function validatePostcodeMsgOff() {
+    const reg = /^[0-9]+$/i;
+    return (postData.postcode.length < 6
+      || postData.postcode.charAt(2) !== '-'
+      || !(reg.test(postData.postcode.charAt(0)))
+      || !(reg.test(postData.postcode.charAt(1)))
+      || !(reg.test(postData.postcode.charAt(3)))
+      || !(reg.test(postData.postcode.charAt(4)))
+      || !(reg.test(postData.postcode.charAt(5)))
+    )
+  }
+  function validatePhoneMsgOff(){
+    return (postData.phone.length !== 9)
+  }
+  function validateDateMsgOff(){
+    return(courierData.date === '')
+  }
+  function validateTimeMsgOff(){
+    return(courierData.time === '')
+  }
+  
+  
   const isWeekday = date => {
     const day = getDay(date);
     return day !== 0 && day !== 6;
   };
   
-  if (formData.step !== 4) return null
+  if (step !== 4) return null
   
   return (
     <section className={'formStep4'}>
@@ -166,7 +221,7 @@ function FormStep4() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep4__counter'}>Krok {formData.step}/4</p>
+        <p className={'formStep4__counter'}>Krok {step}/4</p>
         <h1 className={'formStep4__title'}>Podaj adres oraz termin odbioru rzecz przez kuriera</h1>
         <form className={'formStep4__form'}>
           <div className={'formStep4__wrapper'}>
@@ -180,7 +235,9 @@ function FormStep4() {
                        type={'text'}
                        className={'formStep4__input'}/>
               </label>
-              <p className={'warning__error'}>{validateErrors.streetError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={!validateStreetMsgOff() ? 'warning__error': 'warning__error disabled'}>{validateErrors.streetError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Miasto
                 <input name={'city'}
@@ -189,7 +246,9 @@ function FormStep4() {
                        type={'text'}
                        className={'formStep4__input'}/>
               </label>
-              <p className={'warning__error'}>{validateErrors.cityError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={!validateCityMsgOff() ? 'warning__error': 'warning__error disabled'}>{validateErrors.cityError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Kod pocztowy
                 <input name={'postcode'}
@@ -198,7 +257,9 @@ function FormStep4() {
                        type={'text'}
                        className={'formStep4__input'}/>
               </label>
-              <p className={'warning__error'}>{validateErrors.postcodeError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={validatePostcodeMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.postcodeError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Numer telefonu
                 <input name={'phone'}
@@ -207,7 +268,9 @@ function FormStep4() {
                        type={'number'}
                        className={'formStep4__input'}/>
               </label>
-              <p className={'warning__error'}>{validateErrors.phoneNumberError}</p>
+              <div className={'warning__errorBox'}>
+                <p className={validatePhoneMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.phoneNumberError}</p>
+              </div>
             </div>
             <div className={'formStep4__column'}>
               <h2 className={'formStep4__subtitle'}>Termin odbioru</h2>
@@ -222,6 +285,9 @@ function FormStep4() {
                             filterDate = {isWeekday}
                   />
               </label>
+              <div className={'warning__errorBox'}>
+                <p className={validateDateMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.dateError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Godzina
                 <DatePicker className={'formStep4__input'}
@@ -235,6 +301,9 @@ function FormStep4() {
                             timeCaption="Time"
                             dateFormat="HH:mm" />
               </label>
+              <div className={'warning__errorBox'}>
+                <p className={validateTimeMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.timeError}</p>
+              </div>
               <label className={'formStep4__label'}>
                 Uwagi dla  kuriera
                 <textarea name={'note'}

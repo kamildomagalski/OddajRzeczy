@@ -1,13 +1,14 @@
-import React, { useState, createContext } from 'react';
+import React, {useState, createContext} from 'react';
 
-const FormContext = createContext();
+const FormContext = createContext(null);
 
 function FormProvider(props) {
-  const [formData, setFormData]=useState({
-    step: 4,
+  const [clear, setClear] = useState(0)
+  const [step, setStep] = useState(2)
+  const [formData, setFormData] = useState({
     type: '',
     bags: '',
-    localization:'',
+    localization: '',
     localizationSpecific: '',
     helpGroups: {
       children: false,
@@ -19,37 +20,62 @@ function FormProvider(props) {
     postData: {
       street: '',
       city: '',
-      postcode: ' ',
+      postcode: '',
       phone: ''
     },
     courierData: {
       date: '',
       time: '',
-      note:''
+      note: ''
     }
-
+    
   })
-  const handleSetData= (data)=> {
+  const handleSetData = (data) => {
     setFormData(prevState => ({
       ...prevState,
       ...data
     }))
   }
-
-  const setStep= (num)=> {
-    setFormData(prevState => ({
-      ...prevState,
-      step: num
-    }))
+  
+  const handleSetStep = (num) => {
+    setStep(num)
+  }
+  const clearData = () => {
+    setClear(value => value + 1)
+  }
+  const clearFormData = () => {
+    setFormData({
+      type: '',
+      bags: '',
+      localization: '',
+      localizationSpecific: '',
+      helpGroups: {
+        children: false,
+        singleMother: false,
+        homeless: false,
+        disabledPeople: false,
+        elderly: false
+      },
+      postData: {
+        street: '',
+        city: '',
+        postcode: ' ',
+        phone: ''
+      },
+      courierData: {
+        date: '',
+        time: '',
+        note: ''
+      }
+    })
   }
   
-  
-  
- return (
-  <FormContext.Provider value={{formData, setFormData, handleSetData, setStep}}>
-    {props.children}
-  </FormContext.Provider>
- );
+  return (
+    <FormContext.Provider value={{formData, step, clear, handleSetData, handleSetStep, clearFormData, clearData}}>
+      {props.children}
+    </FormContext.Provider>
+  );
 }
-export { FormProvider, FormContext };
+
+export {FormProvider, FormContext};
 

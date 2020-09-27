@@ -12,31 +12,78 @@
   .header {
     position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
     width: 100%;
     z-index: 2;
 
     @include desktop {
       margin-right: 90px;
-      //width: unset;
+      flex-direction: column;
+      align-items: flex-end;
     }
-
   }
 
   .logIn {
     display: none;
-    margin: 37px 0 17px;
+    margin: 30px 0 0;
     @include desktop {
       display: flex;
       align-items: center;
+      margin: 37px 0 17px;
     }
   }
-&__loading{
-  height: 35px;
-  margin: 37px 0 17px;
+  .logInMobile {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0;
+    @include desktop{
+      display: none;
+    }
 
-}
+    .main__userEmail {
+      font-size: 2.0rem;
+      color: $color-yellow;
+    }
+    .buttonsMobile__wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+    .btn-mobile{
+      padding: 20px 10px;
+      width: 140px;
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      &:hover{
+        border: 1px solid $color-yellow;
+      }
+      &:active{
+        background-color: lightgoldenrodyellow;
+      }
+      &:visited{
+        border: inherit;
+      }
+    }
+    .main__userEmail{
+      margin: 0;
+      text-align: center;
+    }
+  }
+
+  &__loading {
+    display: none;
+    @include desktop{
+      display: block;
+      height: 35px;
+      margin: 37px 0 17px;
+    }
+  }
+
   &__userEmail {
     font-family: $font-base;
     color: $color-dark;
@@ -47,23 +94,22 @@
   .menu {
     display: none;
     position: absolute;
-    top: 60px;
+    top: 80px;
     right: -100%;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    //background-color: $color-light;
     background-color: white;
     @include desktop {
       position: static;
       display: flex;
       width: unset;
       flex-direction: row;
-      height: 42px;
+      max-height: 42px;
+      margin-top: 20px;
       margin-left: 10px;
       background-color: transparent;
       transition: all 0.5s ease;
-
     }
 
     &__active {
@@ -73,21 +119,42 @@
     }
 
     &__element {
-      height: 100%;
-      padding: 9px 20px;
       color: $color-dark;
       font-size: 1.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       @include desktop {
-        height: 100%;
-        padding: 9px 20px;
+        margin-left: 10px;
         color: $color-dark;
         font-size: 1.8rem;
       }
     }
 
     &__link {
-      cursor: pointer;
 
+      height: 42px;
+      cursor: pointer;
+      box-sizing: border-box;
+      border: 1px solid transparent;
+      padding: 9px 20px;
+      width: 100vw;
+      text-align: center;
+
+      &:visited {
+        color: inherit;
+      }
+
+      @include desktop {
+        width: unset;
+        text-align: start;
+      }
+
+      &:hover {
+        @include desktop {
+          border: 1px solid $color-dark;
+        }
+      }
     }
   }
 
@@ -100,15 +167,12 @@
     padding: 20px;
     @include desktop {
       margin-right: 175px;
-
     }
 
     &__title {
       font-size: 3.0rem;
       margin: 0 0 10px;
       text-align: center;
-      //background-color: rgba(255, 255, 255, 0.5);
-
     }
 
     &__buttons {
@@ -120,13 +184,12 @@
       @include desktop {
         flex-direction: row;
         justify-content: space-between;
-
       }
     }
   }
 
   .menu-icon {
-    margin: 30px 30px 0 0;
+    margin: 30px 30px 0 30px;
     cursor: pointer;
     @include desktop {
       display: none;

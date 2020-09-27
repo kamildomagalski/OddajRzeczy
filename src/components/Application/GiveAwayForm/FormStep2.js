@@ -1,10 +1,14 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {FormContext} from "./FormContext";
 
 function FormStep2() {
-  const [bags, setBags] = useState('')
-  const {formData, setStep, handleSetData} = useContext(FormContext)
+  const {formData, step, handleSetStep, handleSetData, clear} = useContext(FormContext)
+  const [bags, setBags] = useState(formData.bags)
   const [validateError, setValidateError] = useState('')
+  
+  useEffect(()=>{
+    setBags(formData.bags)
+  },[clear])
   
   const handleChange = (e) => {
     setBags(e.target.value)
@@ -18,17 +22,17 @@ function FormStep2() {
     
     handleSetData({
       bags,
-      step: 3
     })
+    handleSetStep(3)
   }
   
   const handlePrevPage = () => {
-    setStep(1)
+    handleSetStep(1)
   }
   
   function validate() {
     let isValid = true
-    if (bags === '') {
+    if (bags === '' || bags === 'wybierz') {
       setValidateError('Wybierz ilość worków aby przejść dalej')
       isValid = false
     }
@@ -36,14 +40,15 @@ function FormStep2() {
   }
   
   function validateMsgOff() {
-    return  (bags !== '')
+    return  (bags !== ''
+    && bags !== 'wybierz')
   }
   
   function clearValidate(){
     setValidateError('')
   }
   
-  if (formData.step !== 2) return null
+  if (step !== 2) return null
   
   return (
     <section className={'formStep2'}>
@@ -55,13 +60,13 @@ function FormStep2() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep2__counter'}>Krok {formData.step}/4</p>
+        <p className={'formStep2__counter'}>Krok {step}/4</p>
         <h1 className={'formStep2__title'}>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h1>
         <form className={'formStep2__form'} onSubmit={handleSubmit}>
           <label className={'formStep2__label'}>
             Liczba 60l worków:
             <select value={bags} onChange={handleChange} className={'formStep2__select'}>
-              {/*<option>--wybierz--</option>*/}
+              <option value={'wybierz'}>wybierz</option>
               <option value={1} className={'formStep2__option'}>1</option>
               <option value={2} className={'formStep2__option'}>2</option>
               <option value={3} className={'formStep2__option'}>3</option>

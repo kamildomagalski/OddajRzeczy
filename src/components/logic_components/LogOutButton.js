@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 function LogOutButton({ firebase, className}) {
  return (
   <Link to={'/'} type={'button'} className={ className } onClick={firebase.doSignOut}>
-   Sign Out
+   Wyloguj
   </Link>
  );
 }

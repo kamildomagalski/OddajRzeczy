@@ -1,8 +1,8 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {FormContext} from "./FormContext";
 
 function FormStep3() {
-  const {formData, handleSetData, setStep} = useContext(FormContext)
+  const {formData, step, handleSetData, handleSetStep, clear} = useContext(FormContext)
   
   const [localization, setLocalization] = useState(formData.localization)
   const [localizationSpecific, setLocalizationSpecific] = useState(formData.localizationSpecific)
@@ -11,6 +11,12 @@ function FormStep3() {
     localError: '',
     helpGroupError: ''
   })
+
+  useEffect(()=>{
+    setLocalization(formData.localization)
+    setLocalizationSpecific(formData.localizationSpecific)
+    setHelpGroups(formData.helpGroups)
+  },[clear])
   
   const handleLocalChange = (e) => {
     setLocalization(e.target.value)
@@ -36,13 +42,13 @@ function FormStep3() {
     handleSetData({
       helpGroups,
       localization,
-      localizationSpecific,
-      step: 4
+      localizationSpecific
     })
+    handleSetStep(4)
   }
   
   const handlePrevPage = () => {
-    setStep(2);
+    handleSetStep(2);
   }
   
   function validate() {
@@ -51,7 +57,7 @@ function FormStep3() {
       && (localization === '' || localization === 'wybierz')) {
       setValidateErrors(prevState => ({
         ...prevState,
-        localError: 'Wybierz miasto albo wpisz konkretną organizację aby przejść dalej'
+        localError: 'Wybierz miasto albo wpisz konkretną organizację.'
       }))
       isValid = false;
     }
@@ -62,7 +68,7 @@ function FormStep3() {
       helpGroups.singleMother === false) {
       setValidateErrors(prevState => ({
         ...prevState,
-        helpGroupError: 'Zaznacz przynajmniej jedną grupę aby przejść dalej'
+        helpGroupError: 'Zaznacz przynajmniej jedną grupę.'
       }))
       isValid = false;
     }
@@ -90,7 +96,7 @@ function FormStep3() {
       helpGroups.singleMother === false)
   }
   
-  if (formData.step !== 3) return null
+  if (step !== 3) return null
   
   return (
     <section className={'formStep3'}>
@@ -102,10 +108,10 @@ function FormStep3() {
         </div>
       </div>
       <div className={'container'}>
-        <p className={'formStep3__counter'}>Krok {formData.step}/4</p>
+        <p className={'formStep3__counter'}>Krok {step}/4</p>
         <h1 className={'formStep3__title'}>Lokalizacja:</h1>
         <form className={'formStep3__form'} onSubmit={handleSubmit}>
-          <label className={'formStep3__label'}>Lokalizacja:
+          <label className={'formStep3__label test'}>Lokalizacja:
             <select value={localization} onChange={handleLocalChange} className={'formStep3__select'}>
               <option value={'wybierz'}>wybierz</option>
               <option value={'Poznań'} className={'formStep3__option'}>Poznań</option>
@@ -115,8 +121,9 @@ function FormStep3() {
               <option value={'Katowice'} className={'formStep3__option'}>Katowice</option>
             </select>
           </label>
-          <p
-            className={!validateLocalMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.localError}</p>
+          <div className={'warning__errorBox'}>
+            <p className={!validateLocalMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.localError}</p>
+          </div>
           <h2 className={'formStep3__subtitle'}>Komu chcesz pomóc?</h2>
           <div className={'formStep3__checkboxWrapper'}>
             <label className={'formStep3__label'}>
@@ -162,8 +169,9 @@ function FormStep3() {
               <span className={'customCheckbox'}>osobom starszym</span>
             </label>
           </div>
-          <p
-            className={validateHelpGroupsMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.helpGroupError}</p>
+          <div className={'warning__errorBox'}>
+            <p className={validateHelpGroupsMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.helpGroupError}</p>
+          </div>
           <h2 className={'formStep3__subtitle'}>Wpisz nazwę konkretnej organizacji (opcjonalnie)</h2>
           <label className={'formStep3__label formStep__label-localSpec'}>
             <input name={'localizationSpecific'}

@@ -1,12 +1,14 @@
-import React, {useContext} from 'react';
-import {FormContext} from "./FormContext";
+import React, { useContext } from 'react';
+import { FormContext } from "./FormContext";
 import shirtIcon from '../../../assets/Icon-1.svg'
 import arrowsIcon from '../../../assets/Icon-4.svg'
 import format from 'date-fns/format'
+import { withFirebase } from "../../Firebase";
 
-function FormSummary() {
+
+function FormSummary( { firebase }) {
   
-  const {formData, setStep} = useContext(FormContext)
+  const { formData, step, handleSetStep, clearFormData, clearData } = useContext(FormContext)
   
   const translateHelpGroup = {
     singleMother: 'samotnym matkom',
@@ -22,13 +24,21 @@ function FormSummary() {
     .join(", ")
   
   const handlePrevPage = () => {
-    setStep(4);
+    handleSetStep(4);
+  }
+  const handleForceUpdate= () => clearData;
+  
+  const userId= firebase.auth.currentUser.uid;
+  const handleConfirm = () => {
+    firebase.user(userId).child('userDonations').push().update(formData)
+      .then(clearFormData)
+      .then(handleForceUpdate())
+      .then(handleSetStep(6))
+
   }
   
-  const handleConfirm = () => {
-    setStep(6)
-  }
-  if (formData.step !== 5) return null
+  
+  if (step !== 5) return null
   
   return (
     <section className={'formSummary'}>
@@ -74,15 +84,19 @@ function FormSummary() {
               <tbody>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Data</td>
-                <td className={'formSummary__tableData'}>{format(formData.courierData.date, "dd/MM/yyyy")}</td>
+                <td className={'formSummary__tableData'}>
+                  {format(formData.courierData.date, "dd/MM/yyyy")}
+                </td>
               </tr>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Godzina</td>
-                <td className={'formSummary__tableData'}>{format(formData.courierData.time, "HH:mm")}</td>
+                <td className={'formSummary__tableData'}>
+                  {format(formData.courierData.time, "HH:mm")}
+                </td>
               </tr>
               <tr className={'formSummary__tableRow'}>
                 <td className={'formSummary__tableData formSummary__tableData-title'}>Uwagi dla kuriera</td>
-                <td className={'formSummary__tableData'}>{formData.courierData.note}</td>
+                <td className={'formSummary__tableData'}>{formData.courierData.note !== '' ? formData.courierData.note : 'brak uwag'}</td>
               </tr>
               </tbody>
             </table>
@@ -101,4 +115,4 @@ function FormSummary() {
   );
 }
 
-export default FormSummary;
+export default withFirebase(FormSummary);
