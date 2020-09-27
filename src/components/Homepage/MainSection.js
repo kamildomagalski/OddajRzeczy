@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { withFirebase } from "../Firebase";
-import { Link } from "react-router-dom";
-import { Link as LinkScroll, animateScroll as scroll } from 'react-scroll';
+import React, {useEffect, useState} from 'react';
+import {withFirebase} from "../Firebase";
+import {Link} from "react-router-dom";
+import {Link as LinkScroll, animateScroll as scroll} from 'react-scroll';
 
 import decoration from '../../assets/Decoration.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import LogButtons from "../logic_components/LogButtons";
 import LogButtonsMobile from "../logic_components/LogButtonsMobile";
+import {AuthUserContext} from "../Session";
 
-function MainSection({ firebase }) {
+function MainSection({firebase}) {
   const [menuClick, setMenuClick] = useState(false)
   const [userEmail, setUserEmail] = useState(null)
   const [isLoaded, setLoaded] = useState(false)
@@ -26,8 +27,27 @@ function MainSection({ firebase }) {
     })
   }, [userId])
   
-  return (
+  const ContentButtonsOn = () => {
+    return (
+      <div className={'content__buttons'}>
+        <Link to={'/app'} className={'btn btn-big'}>Oddaj Rzeczy</Link>
+        <Link to={'/app'} className={'btn btn-big'}>Zorganizuj Zbiórkę</Link>
+      </div>
+    )
+  }
   
+  const ContentButtonsOff = () => {
+    return (
+      <div className={'content__buttons'}>
+        <Link to={'/login'} className={'btn btn-big'}>Oddaj Rzeczy</Link>
+        <Link to={'/login'} className={'btn btn-big'}>Zorganizuj Zbiórkę</Link>
+      </div>
+    )
+  }
+  
+  
+  return (
+    
     <section className={'main'}>
       <div className={'backgroundFilter'}>
         <header className={'header'}>
@@ -59,17 +79,17 @@ function MainSection({ firebase }) {
                                                         spy={true}
                                                         smooth={true}
                                                         duration={500}>Kontakt</LinkScroll></li>
-            <LogButtonsMobile userEmail={userEmail} />
+            <LogButtonsMobile userEmail={userEmail}/>
           </ul>
         </header>
         <div className={'content'}>
           <h2 className={'content__title'}>Zacznij pomagać!</h2>
           <h2 className={'content__title'}>Oddaj niechciane rzeczy w zaufane ręce</h2>
           <img className={'decoration'} src={decoration} alt={'decoration'}/>
-          <div className={'content__buttons'}>
-            <Link to={'/login'} className={'btn btn-big'}>Oddaj Rzeczy</Link>
-            <Link to={'/login'} className={'btn btn-big'}>Zorganizuj Zbiórkę</Link>
-          </div>
+          <AuthUserContext.Consumer>
+            {authUser =>
+              authUser ? <ContentButtonsOn /> : <ContentButtonsOff/>}
+          </AuthUserContext.Consumer>
         </div>
       </div>
     </section>

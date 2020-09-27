@@ -5,8 +5,14 @@ import icon2 from '../../assets/Icon-2.svg'
 import icon3 from '../../assets/Icon-3.svg'
 import icon4 from '../../assets/Icon-4.svg'
 import {Link} from "react-router-dom";
+import {AuthUserContext} from "../Session";
 
 function StepsSection() {
+  
+  const LinkUserOn = () => <Link to={'/app'} className={'btn btn-big'}>Oddaj Rzeczy</Link>
+  
+  const LinkUserOff = () => <Link to={'/login'} className={'btn btn-big'}>Oddaj Rzeczy</Link>
+  
   return (
     <section className={'steps'} id={'steps'}>
       
@@ -46,8 +52,11 @@ function StepsSection() {
           
         </div>
       </div>
+      <AuthUserContext.Consumer>
+        {authUser =>
+          authUser ? <LinkUserOn /> : <LinkUserOff/>}
+      </AuthUserContext.Consumer>
       
-      <Link to={'/login'} className={'btn btn-big'}>Oddaj Rzeczy</Link>
     
     
     </section>
