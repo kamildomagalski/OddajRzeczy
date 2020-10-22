@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {FormContext} from "./FormContext";
+import Select from "../../logic_components/Select";
 
 function FormStep2() {
   const {formData, step, handleSetStep, handleSetData, clear} = useContext(FormContext)
@@ -10,8 +11,8 @@ function FormStep2() {
     setBags(formData.bags)
   },[clear])
   
-  const handleChange = (e) => {
-    setBags(e.target.value)
+  const handleChange = (value) => {
+    setBags(value)
   }
   
   const handleSubmit = (event) => {
@@ -63,17 +64,18 @@ function FormStep2() {
         <p className={'formStep2__counter'}>Krok {step}/4</p>
         <h1 className={'formStep2__title'}>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h1>
         <form className={'formStep2__form'} onSubmit={handleSubmit}>
-          <label className={'formStep2__label'}>
-            Liczba 60l worków:
-            <select value={bags} onChange={handleChange} className={'formStep2__select'}>
-              <option value={'wybierz'}>wybierz</option>
-              <option value={1} className={'formStep2__option'}>1</option>
-              <option value={2} className={'formStep2__option'}>2</option>
-              <option value={3} className={'formStep2__option'}>3</option>
-              <option value={4} className={'formStep2__option'}>4</option>
-              <option value={5} className={'formStep2__option'}>5</option>
-            </select>
-          </label>
+          <div className={'formStep2__label'}>
+            <p>Liczba 60l worków:</p>
+            <Select options={[1,2,3,4,5]} selectValue={bags} changeHandler={handleChange} className={'selectStep2'}/>
+            {/*<select value={bags} onChange={handleChange} className={'formStep2__select'}>*/}
+            {/*  <option value={'wybierz'}>wybierz</option>*/}
+            {/*  <option value={1} className={'formStep2__option'}>1</option>*/}
+            {/*  <option value={2} className={'formStep2__option'}>2</option>*/}
+            {/*  <option value={3} className={'formStep2__option'}>3</option>*/}
+            {/*  <option value={4} className={'formStep2__option'}>4</option>*/}
+            {/*  <option value={5} className={'formStep2__option'}>5</option>*/}
+            {/*</select>*/}
+          </div>
           <p className={!validateMsgOff() ? 'warning__error' : 'warning__error disabled' }>{validateError}</p>
           <div className={'formStep__buttons'}>
             <button onClick={handlePrevPage} type={"button"}
