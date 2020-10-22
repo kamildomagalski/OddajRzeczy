@@ -67,14 +67,6 @@ function FormStep2() {
           <div className={'formStep2__label'}>
             <p>Liczba 60l worków:</p>
             <Select options={[1,2,3,4,5]} selectValue={bags} changeHandler={handleChange} className={'selectStep2'}/>
-            {/*<select value={bags} onChange={handleChange} className={'formStep2__select'}>*/}
-            {/*  <option value={'wybierz'}>wybierz</option>*/}
-            {/*  <option value={1} className={'formStep2__option'}>1</option>*/}
-            {/*  <option value={2} className={'formStep2__option'}>2</option>*/}
-            {/*  <option value={3} className={'formStep2__option'}>3</option>*/}
-            {/*  <option value={4} className={'formStep2__option'}>4</option>*/}
-            {/*  <option value={5} className={'formStep2__option'}>5</option>*/}
-            {/*</select>*/}
           </div>
           <p className={!validateMsgOff() ? 'warning__error' : 'warning__error disabled' }>{validateError}</p>
           <div className={'formStep__buttons'}>
