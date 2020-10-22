@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {FormContext} from "./FormContext";
+import Select from "../../logic_components/Select";
 
 function FormStep3() {
   const {formData, step, handleSetData, handleSetStep, clear} = useContext(FormContext)
@@ -11,15 +12,15 @@ function FormStep3() {
     localError: '',
     helpGroupError: ''
   })
-
-  useEffect(()=>{
+  
+  useEffect(() => {
     setLocalization(formData.localization)
     setLocalizationSpecific(formData.localizationSpecific)
     setHelpGroups(formData.helpGroups)
-  },[clear])
+  }, [clear])
   
-  const handleLocalChange = (e) => {
-    setLocalization(e.target.value)
+  const handleLocalChange = (value) => {
+    setLocalization(value)
   }
   const handleLocalSpecChange = (e) => {
     setLocalizationSpecific(e.target.value)
@@ -111,18 +112,22 @@ function FormStep3() {
         <p className={'formStep3__counter'}>Krok {step}/4</p>
         <h1 className={'formStep3__title'}>Lokalizacja:</h1>
         <form className={'formStep3__form'} onSubmit={handleSubmit}>
-          <label className={'formStep3__label test'}>Lokalizacja:
-            <select value={localization} onChange={handleLocalChange} className={'formStep3__select'}>
-              <option value={'wybierz'}>wybierz</option>
-              <option value={'Poznań'} className={'formStep3__option'}>Poznań</option>
-              <option value={'Warszawa'} className={'formStep3__option'}>Warszawa</option>
-              <option value={'Kraków'} className={'formStep3__option'}>Kraków</option>
-              <option value={'Wrocław'} className={'formStep3__option'}>Wrocław</option>
-              <option value={'Katowice'} className={'formStep3__option'}>Katowice</option>
-            </select>
-          </label>
+          <div className={'formStep3__label test'}>
+            <p>Lokalizacja:</p>
+            <Select options={['Poznań', 'Warszawa', 'Kraków', 'Wrocław', 'Katowice']} selectValue={localization}
+                    className={'selectStep3'} changeHandler={handleLocalChange}/>
+            {/*<select value={localization} onChange={handleLocalChange} className={'formStep3__select'}>*/}
+            {/*  <option value={'wybierz'}>wybierz</option>*/}
+            {/*  <option value={'Poznań'} className={'formStep3__option'}>Poznań</option>*/}
+            {/*  <option value={'Warszawa'} className={'formStep3__option'}>Warszawa</option>*/}
+            {/*  <option value={'Kraków'} className={'formStep3__option'}>Kraków</option>*/}
+            {/*  <option value={'Wrocław'} className={'formStep3__option'}>Wrocław</option>*/}
+            {/*  <option value={'Katowice'} className={'formStep3__option'}>Katowice</option>*/}
+            {/*</select>*/}
+          </div>
           <div className={'warning__errorBox'}>
-            <p className={!validateLocalMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.localError}</p>
+            <p
+              className={!validateLocalMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.localError}</p>
           </div>
           <h2 className={'formStep3__subtitle'}>Komu chcesz pomóc?</h2>
           <div className={'formStep3__checkboxWrapper'}>
@@ -170,7 +175,8 @@ function FormStep3() {
             </label>
           </div>
           <div className={'warning__errorBox'}>
-            <p className={validateHelpGroupsMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.helpGroupError}</p>
+            <p
+              className={validateHelpGroupsMsgOff() ? 'warning__error' : 'warning__error disabled'}>{validateErrors.helpGroupError}</p>
           </div>
           <h2 className={'formStep3__subtitle'}>Wpisz nazwę konkretnej organizacji (opcjonalnie)</h2>
           <label className={'formStep3__label formStep__label-localSpec'}>
